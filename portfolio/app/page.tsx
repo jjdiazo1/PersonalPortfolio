@@ -134,7 +134,30 @@ export default function Home() {
         </animated.div>
       </section>
 
-      
+      {/* Languages Section */}
+      <section className="p-8">
+        <h2 className="text-4xl font-bold mb-6 text-center text-gradient bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
+          Languages
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
+        <h3 className="font-semibold text-lg">Español</h3>
+        <p className="text-sm text-gray-400">Nativo</p>
+          </div>
+          <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
+        <h3 className="font-semibold text-lg">Francés</h3>
+        <p className="text-sm text-gray-400">B2</p>
+          </div>
+          <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
+        <h3 className="font-semibold text-lg">Inglés</h3>
+        <p className="text-sm text-gray-400">C1</p>
+          </div>
+          <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
+        <h3 className="font-semibold text-lg">Japonés</h3>
+        <p className="text-sm text-gray-400">A2</p>
+          </div>
+        </div>
+      </section>
 
       {/* Footer */}
       <footer className="p-6 bg-black text-center">
