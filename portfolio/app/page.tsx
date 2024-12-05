@@ -1,101 +1,161 @@
-import Image from "next/image";
+'use client';
+import { useSpring, animated } from '@react-spring/web';
+import { useInView } from 'react-intersection-observer';
+import { useState } from 'react';
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [profileRef, profileInView] = useInView({ triggerOnce: true });
+  const profileAnimation = useSpring({
+    opacity: profileInView ? 1 : 0,
+    transform: profileInView ? 'translateY(0px)' : 'translateY(50px)',
+    config: { tension: 150, friction: 20 },
+  });
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+  const [experienceRef, experienceInView] = useInView({ triggerOnce: true });
+  const experienceAnimation = useSpring({
+    opacity: experienceInView ? 1 : 0,
+    transform: experienceInView ? 'scale(1)' : 'scale(0.9)',
+    config: { tension: 170, friction: 25 },
+  });
+
+  const [educationRef, educationInView] = useInView({ triggerOnce: true });
+  const educationAnimation = useSpring({
+    opacity: educationInView ? 1 : 0,
+    transform: educationInView ? 'translateY(0px)' : 'translateY(50px)',
+    config: { tension: 120, friction: 18 },
+  });
+
+  // Light/Dark Mode Toggle
+  const [darkMode, setDarkMode] = useState(true);
+
+  return (
+    <main
+      className={`${
+        darkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'
+      } min-h-screen transition-all duration-500`}
+    >
+      {/* Light/Dark Mode Button */}
+      <button
+        onClick={() => setDarkMode(!darkMode)}
+        className="absolute top-4 right-4 p-2 rounded-full shadow-lg bg-gray-800 text-white hover:bg-gray-700"
+      >
+        {darkMode ? '☀️ Light Mode' : '🌙 Dark Mode'}
+      </button>
+
+      {/* Hero Section */}
+      <section className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-blue-500 to-indigo-700 text-center shadow-lg">
+        <h1 className="text-5xl md:text-7xl font-bold tracking-wide bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-red-500 to-purple-600">
+          Juan Jose Diaz
+        </h1>
+        <p className="text-xl md:text-3xl mt-4 font-light">Systems and Computer Engineer</p>
+        <p className="mt-6 text-lg text-gray-200">Welcome to my portfolio! 👨‍💻</p>
+        <div className="mt-8 space-x-4">
+          <button className="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-lg font-medium">
+            View Projects
+          </button>
+          <button className="bg-transparent border-2 border-white hover:bg-white hover:text-indigo-600 text-white px-6 py-3 rounded-lg font-medium">
+            Contact Me
+          </button>
+        </div>
+      </section>
+
+      {/* Profile Section */}
+      <section ref={profileRef} className="p-8">
+        <animated.div style={profileAnimation} className="bg-gray-800 rounded-lg shadow-xl p-6">
+          <h2 className="text-4xl font-bold text-gradient bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-blue-600">
+            Profile
+          </h2>
+          <div className="flex flex-col items-center">
+            <img
+              src="/Profile.jpg"
+              alt="Profile"
+              className="rounded-full h-32 w-32 mx-auto shadow-lg border-4 border-indigo-500 mt-4"
             />
-            Deploy now
+            <p className="mt-4 text-gray-300 text-lg text-center">
+              Dedicated, hardworking Software Engineering and Computer Science student at
+              Universidad de Los Andes, with a calm and collaborative mindset.
+            </p>
+          </div>
+        </animated.div>
+      </section>
+
+      {/* Experience Section */}
+      <section ref={experienceRef} className="p-8">
+        <h2 className="text-4xl font-bold mb-6 text-center text-gradient bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-red-600">
+          Experience
+        </h2>
+        <animated.div
+          style={experienceAnimation}
+          className="grid grid-cols-1 sm:grid-cols-2 gap-6"
+        >
+          {/* Job 1 */}
+          <div className="bg-gradient-to-tr from-gray-700 to-gray-800 p-6 rounded-lg shadow-lg hover:scale-105 transition-transform">
+            <h3 className="font-semibold text-xl flex items-center space-x-2">
+              <i className="fas fa-pencil-alt"></i> Graphic Designer - Pilos Creativos
+            </h3>
+            <p className="text-sm text-gray-400">Jan 2022 - Apr 2022</p>
+            <ul className="mt-2 text-gray-300 text-sm list-disc pl-4">
+              <li>Managed social media pages and created innovative posts.</li>
+              <li>Handled client communication with the graphic team.</li>
+              <li>Controlled product photography for social media.</li>
+            </ul>
+          </div>
+
+          {/* Job 2 */}
+          <div className="bg-gradient-to-tr from-gray-700 to-gray-800 p-6 rounded-lg shadow-lg hover:scale-105 transition-transform">
+            <h3 className="font-semibold text-xl flex items-center space-x-2">
+              <i className="fas fa-globe"></i> Translator - Juan Maria Hotel
+            </h3>
+            <p className="text-sm text-gray-400">Nov 2019 - Jan 2020</p>
+            <ul className="mt-2 text-gray-300 text-sm list-disc pl-4">
+              <li>Provided translation services for international clients.</li>
+              <li>Enhanced the hotel’s catalog with updated photos.</li>
+            </ul>
+          </div>
+        </animated.div>
+      </section>
+
+      {/* Education Section */}
+      <section ref={educationRef} className="p-8">
+        <animated.div style={educationAnimation}>
+          <h2 className="text-4xl font-bold mb-6 text-center text-gradient bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-teal-600">
+            Education
+          </h2>
+          <ul className="space-y-6">
+            <li className="bg-gray-800 p-6 rounded-lg shadow-lg">
+              <h3 className="font-semibold text-lg">Universidad de Los Andes</h3>
+              <p className="text-sm text-gray-400">Systems and Computer Science Engineering</p>
+            </li>
+            <li className="bg-gray-800 p-6 rounded-lg shadow-lg">
+              <h3 className="font-semibold text-lg">SENA</h3>
+              <p className="text-sm text-gray-400">Computer and Systems Technician</p>
+            </li>
+          </ul>
+        </animated.div>
+      </section>
+
+      
+
+      {/* Footer */}
+      <footer className="p-6 bg-black text-center">
+        <div className="mt-4 flex justify-center space-x-6">
+          <a
+            href="https://github.com/yourusername"
+            className="text-gray-400 hover:text-white transition-colors"
+          >
+            <i className="fab fa-github text-xl"></i>
           </a>
           <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="https://linkedin.com/in/yourprofile"
+            className="text-gray-400 hover:text-white transition-colors"
           >
-            Read our docs
+            <i className="fab fa-linkedin text-xl"></i>
           </a>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+        <p className="text-gray-400 mt-4">
+          © {new Date().getFullYear()} Juan Jose Diaz. All rights reserved.
+        </p>
       </footer>
-    </div>
+    </main>
   );
 }
