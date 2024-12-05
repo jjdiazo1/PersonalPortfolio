@@ -31,16 +31,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-900 text-white`}
       >
-        {/* Header */}
-        <header className="p-4 bg-gray-800 text-center">
-          <h1 className="text-lg font-bold">Juan Jose Diaz</h1>
-        </header>
-
         {/* Contenido principal */}
         <main>{children}</main>
 
         {/* Footer */}
-        <footer className="p-4 bg-gray-800 text-center text-sm text-gray-400">
+        <footer className="p-4 bg-black text-center text-sm text-gray-400">
           © {new Date().getFullYear()} Juan Jose Diaz. Todos los derechos reservados.
         </footer>
       </body>

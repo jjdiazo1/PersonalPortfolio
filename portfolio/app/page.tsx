@@ -34,7 +34,7 @@ export default function Home() {
 
   // Typing animation for hero subtitle
   const heroSubtitle = "Systems and Computer Engineer - A Passion for Innovation";
-  const heroChars = heroSubtitle.split("");
+  const heroChars = heroSubtitle.split("").map(char => char === " " ? "\u00A0" : char);
 
   return (
     <>
@@ -73,25 +73,43 @@ export default function Home() {
           id="hero"
           className="relative flex flex-col items-center justify-center min-h-screen text-center px-4 border-b border-white overflow-hidden"
         >
-          {/* Background moving text */}
-          <motion.div
-            className="absolute text-[10rem] font-extrabold uppercase text-white opacity-5 select-none pointer-events-none"
+            {/* Background moving text */}
+            <motion.div
+            className="absolute text-[10rem] font-extrabold uppercase text-white opacity-10 select-none pointer-events-none"
             initial={{ x: "-50%" }}
             animate={{ x: ["-50%", "50%", "-50%"], rotate: [0, 0, 0] }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            style={{ top: "40%" }}
-          >
+            style={{ top: "10%" }}
+            >
             Portfolio
-          </motion.div>
+            </motion.div>
+            <motion.div
+            className="absolute text-[10rem] font-extrabold uppercase text-white opacity-10 select-none pointer-events-none"
+            initial={{ x: "50%" }}
+            animate={{ x: ["50%", "-50%", "50%"], rotate: [0, 0, 0] }}
+            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+            style={{ top: "30%" }}
+            >
+            Portfolio
+            </motion.div>
+            <motion.div
+            className="absolute text-[10rem] font-extrabold uppercase text-white opacity-10 select-none pointer-events-none"
+            initial={{ x: "-50%" }}
+            animate={{ x: ["-50%", "50%", "-50%"], rotate: [0, 0, 0] }}
+            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+            style={{ top: "50%" }}
+            >
+            Portfolio
+            </motion.div>
 
-          <div className="z-10 flex flex-col items-center space-y-6 max-w-lg">
+            <div className="z-10 flex flex-col items-center space-y-6 max-w-full px-4">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 2.2, duration: 0.5 }}
-              className="text-5xl md:text-7xl font-bold uppercase"
+              className="text-5xl md:text-7xl font-bold uppercase text-center"
             >
-              Juan Jose Diaz
+              Juan Jose Diaz Ortega
             </motion.h1>
 
             {/* Typing animation */}
