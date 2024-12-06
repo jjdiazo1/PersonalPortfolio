@@ -359,7 +359,7 @@ export default function Home() {
         {/* Logo frame */}
         <div className="w-full md:w-1/3 flex items-center justify-center border-t md:border-t-0 md:border-l ${borderClass} mt-4 md:mt-0 pt-4 md:pt-0">
           <div className={`h-24 w-24 border ${borderClass} flex items-center justify-center text-xs uppercase`}>
-            <Image src="/Pilos.jpg" alt="Pilos Creativos Logo" className="object-contain w-full h-full" width={60} height={60} />
+            <Image src="/Pilos.jpg" alt="Pilos Creativos Logo" className="object-contain w-full h-full" width={500} height={500} />
           </div>
         </div>
       </div>
@@ -377,7 +377,7 @@ export default function Home() {
         {/* Logo frame */}
         <div className="w-full md:w-1/3 flex items-center justify-center border-t md:border-t-0 md:border-l ${borderClass} mt-4 md:mt-0 pt-4 md:pt-0">
           <div className={`h-24 w-24 border ${borderClass} flex items-center justify-center text-xs uppercase`}>
-            <Image src="/Hotel.png" alt="Hotel Juan Maria Logo" className="object-contain w-full h-full" width={60} height={60} />
+            <Image src="/Hotel.png" alt="Hotel Juan Maria Logo" className="object-contain w-full h-full" width={500} height={500} />
           </div>
         </div>
       </div>
