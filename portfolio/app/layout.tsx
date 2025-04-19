@@ -6,8 +6,12 @@ import "./globals.css";
 // Metadata personalizada
 export const metadata: Metadata = {
   title: "Juan Jose Diaz - Portfolio",
-  description: "Portafolio de Juan Jose Diaz, Systems and Computer Engineer.",
+  description: "Juan Jose Diaz's portfolio, Systems and Computer Engineer.",
+  icons: {
+    icon: '/favicon.svg',
+  },
 };
+
 // Fonts
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const montserrat = Montserrat({ 
