@@ -4,22 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-
-// Tipo Project
-interface Project {
-  id: number;
-  title: string;
-  category: string;
-  description: string;
-  tags: string[];
-  image: string;
-  fullImage: string;
-  client?: string;
-  year?: string;
-  timeline?: string;
-  role?: string;
-  liveUrl?: string;
-}
+import { Project, getProjectById } from '@/lib/ProjectsData';
 
 // Componente de página de detalle de proyecto
 export default function ProjectDetail({ id: propId }: { id?: string | string[] }) {
@@ -31,103 +16,20 @@ export default function ProjectDetail({ id: propId }: { id?: string | string[] }
 
   // Fetch project data
   useEffect(() => {
-    if (id) {
-      // En un entorno real, harías una solicitud API
-      // Simulación de obtención de datos del proyecto
-      const projectId = parseInt(id as string);
-      
-      // Datos de ejemplo
-      const projectsData: Project[] = [
-        {
-          id: 1,
-          title: "School of Architecture Website",
-          category: "Web Development",
-          description: "Design & development of the official website for the School of Architecture and Design at Uniandes. This large website had to effectively communicate a plethora of activities that occur at the School: education programs, workshops, exhibitions, and more. The project involved close collaboration with faculty and administration to ensure the site met diverse needs while maintaining a cohesive visual identity.",
-          tags: ["React", "NextJS", "Tailwind", "PHP", "WordPress"],
-          image: "/api/placeholder/600/400",
-          fullImage: "/api/placeholder/1200/800",
-          client: "Universidad de los Andes",
-          year: "2023",
-          timeline: "4 months",
-          role: "Lead Developer & Designer",
-          liveUrl: "https://example.com/architecture-school"
-        },
-        {
-          id: 2,
-          title: "Pavilion Website & Branding",
-          category: "Web Design",
-          description: "Website & branding for an academic conference directed at creatives from all around the globe. The project included developing a distinctive visual identity and a responsive website that effectively communicated the conference's purpose, schedule, and registration information to an international audience of academics and creative professionals.",
-          tags: ["Branding", "UI/UX", "Web Design", "JavaScript", "CSS"],
-          image: "/api/placeholder/600/400",
-          fullImage: "/api/placeholder/1200/800",
-          client: "Academic Conference Committee",
-          year: "2022",
-          timeline: "2 months",
-          role: "Web Designer",
-          liveUrl: "https://example.com/pavilion"
-        },
-        {
-          id: 3,
-          title: "Times to Listen",
-          category: "Interactive Design",
-          description: "An exhibition of interactive textiles that narrate the testimonies of the women that sewed them. This project combined physical computing with textile art to create a multimedia exhibition experience that honored these women's stories through an innovative approach to storytelling and audience engagement.",
-          tags: ["Interactive", "Exhibition", "Design", "Arduino", "Physical Computing"],
-          image: "/api/placeholder/600/400",
-          fullImage: "/api/placeholder/1200/800",
-          client: "Art Gallery",
-          year: "2023",
-          timeline: "6 months",
-          role: "Interactive Designer",
-          liveUrl: "https://example.com/times-to-listen"
-        },
-        {
-          id: 4,
-          title: "Asterism",
-          category: "Interactive Design",
-          description: "An interactive lighting installation that responds to movement and sound. Created a dynamic environment that transformed space through light patterns that evolved based on visitor interaction and ambient sound. The installation used custom hardware and software to create an immersive experience that changed throughout the day.",
-          tags: ["Interactive", "Installation", "IoT", "Lighting Design", "Python"],
-          image: "/api/placeholder/600/400",
-          fullImage: "/api/placeholder/1200/800",
-          client: "Public Art Initiative",
-          year: "2023",
-          timeline: "3 months",
-          role: "Installation Designer & Developer",
-          liveUrl: "https://example.com/asterism"
-        },
-        {
-          id: 5,
-          title: "Web Literacy Course",
-          category: "Education",
-          description: "Developed a comprehensive web development curriculum and interactive learning platform to teach coding fundamentals. Created exercises, coding challenges, and learning materials to support diverse learning styles and skill levels, with a focus on making web development accessible to beginners.",
-          tags: ["Education", "JavaScript", "React", "Curriculum Development"],
-          image: "/api/placeholder/600/400",
-          fullImage: "/api/placeholder/1200/800",
-          client: "Educational Institution",
-          year: "2022",
-          timeline: "5 months",
-          role: "Curriculum Developer & Instructor",
-          liveUrl: "https://example.com/web-literacy"
-        },
-        {
-          id: 6,
-          title: "Interactive Typography",
-          category: "Design",
-          description: "Interactive type design experiment exploring dynamic letterforms. Created a responsive typography system that transforms and adapts based on user interaction, screen size, and environmental factors. This exploration in creative coding pushed the boundaries of traditional typography by treating letterforms as living, responsive entities.",
-          tags: ["Typography", "Interactive", "Design", "JavaScript", "Creative Coding"],
-          image: "/api/placeholder/600/400",
-          fullImage: "/api/placeholder/1200/800",
-          client: "Personal Project",
-          year: "2023",
-          timeline: "2 months",
-          role: "Type Designer & Developer",
-          liveUrl: "https://example.com/interactive-typography"
+    const loadProject = async () => {
+      if (id) {
+        try {
+          const projectData = await getProjectById(Array.isArray(id) ? id[0] : id);
+          setProject(projectData);
+        } catch (error) {
+          console.error('Error loading project:', error);
+        } finally {
+          setLoading(false);
         }
-      ];
-      
-      const foundProject = projectsData.find(p => p.id === projectId) || null;
-      setProject(foundProject);
-      setLoading(false);
-    }
+      }
+    };
+
+    loadProject();
   }, [id]);
 
   // Theme classes
@@ -164,7 +66,7 @@ export default function ProjectDetail({ id: propId }: { id?: string | string[] }
         <div className={`${bgClass} border-b ${borderClass} transition-colors duration-300`}>
           <div className="container mx-auto px-4 py-4">
             <div className="flex justify-between items-center">
-              <Link href="/" className="text-xl font-bold">JJ.DEV</Link>
+              <Link href="/" className="text-xl font-bold">Juanjo Diaz</Link>
               
               <div className="flex items-center space-x-4">
                 <Link href="/" className="text-sm uppercase tracking-wider">
@@ -211,7 +113,7 @@ export default function ProjectDetail({ id: propId }: { id?: string | string[] }
                 <h2 className="text-2xl font-bold mb-4">Project Overview</h2>
                 <div className={`prose ${textClass} max-w-none`}>
                   <p className="text-lg leading-relaxed mb-6">
-                    {project.description}
+                    {project.fullDescription || project.description}
                   </p>
                   
                   {/* Contenido adicional del proyecto - puedes agregar más secciones según necesites */}
@@ -236,22 +138,26 @@ export default function ProjectDetail({ id: propId }: { id?: string | string[] }
                 </div>
               </div>
               
-              {/* Project gallery - aquí puedes poner más imágenes */}
+              {/* Project gallery */}
               <div className="mb-10">
                 <h2 className="text-2xl font-bold mb-6">Project Gallery</h2>
                 <div className="grid grid-cols-2 gap-4">
-                  <div className={`border ${borderClass} rounded-lg overflow-hidden aspect-video`}>
-                    <img src="/api/placeholder/600/400" alt="Project image" className="w-full h-full object-cover" />
-                  </div>
-                  <div className={`border ${borderClass} rounded-lg overflow-hidden aspect-video`}>
-                    <img src="/api/placeholder/600/400" alt="Project image" className="w-full h-full object-cover" />
-                  </div>
-                  <div className={`border ${borderClass} rounded-lg overflow-hidden aspect-video`}>
-                    <img src="/api/placeholder/600/400" alt="Project image" className="w-full h-full object-cover" />
-                  </div>
-                  <div className={`border ${borderClass} rounded-lg overflow-hidden aspect-video`}>
-                    <img src="/api/placeholder/600/400" alt="Project image" className="w-full h-full object-cover" />
-                  </div>
+                  {/* Imágenes del proyecto con verificación segura */}
+                  {project.additionalImages?.map((image, index) => (
+                    <div key={`image-${index}`} className={`border ${borderClass} rounded-lg overflow-hidden aspect-video`}>
+                      <img src={image} alt={`${project.title} image ${index + 1}`} className="w-full h-full object-cover" />
+                    </div>
+                  ))}
+                  
+                  {/* Si no hay suficientes imágenes adicionales, mostramos placeholders */}
+                  {Array.from({ length: 4 - (project.additionalImages?.length || 0) }).map((_, index) => (
+                    <div 
+                      key={`placeholder-${index}`} 
+                      className={`border ${borderClass} rounded-lg overflow-hidden aspect-video bg-gray-100 dark:bg-gray-800 flex items-center justify-center`}
+                    >
+                      <span className={`${secondaryTextClass} text-sm`}>Image Placeholder</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>

@@ -1,28 +1,11 @@
 'use client'
 
-import { useState, useEffect, useRef, useContext } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useInView } from 'react-intersection-observer';
 import ProjectsSection from './ProjectsSection';
-
-// Definición del tipo Project
-interface Project {
-  id: number;
-  title: string;
-  category: string;
-  description: string;
-  tags: string[];
-  image: string;
-  fullImage: string;
-  additionalImages: string[];
-  client?: string;
-  year?: string;
-  timeline?: string;
-  role?: string;
-  liveUrl?: string;
-}
 
 export default function ModernPortfolio() {
   // IMPORTANTE: Mantener TODOS los hooks al principio, sin condiciones entre ellos
@@ -102,75 +85,6 @@ export default function ModernPortfolio() {
   const borderHoverClass = darkMode ? 'hover:border-indigo-500' : 'hover:border-indigo-600';
   const secondaryTextClass = darkMode ? 'text-gray-400' : 'text-gray-600';
 
-  // Sample projects (placeholders)
-  const projects: Project[] = [
-    {
-      id: 1,
-      title: "School of Architecture Website",
-      category: "Web Development",
-      description: "Design & development of the official website for the School of Architecture and Design at Uniandes.",
-      tags: ["React", "NextJS", "Tailwind"],
-      image: "/api/placeholder/600/400",
-      additionalImages: ["/api/placeholder/600/400", "/api/placeholder/600/400"],
-      fullImage: "/api/placeholder/1200/800"
-    },
-    {
-      id: 2,
-      title: "Pavilion Website & Branding",
-      category: "Web Design",
-      description: "Website & branding for an academic conference directed at creatives from all around the globe.",
-      tags: ["Branding", "UI/UX", "Web Design"],
-      image: "/Profile.jpg",
-      additionalImages: ["/hotel.png", "/Pilos.jpg"],
-      fullImage: "/api/placeholder/1200/800"
-    },
-    {
-      id: 3,
-      title: "Times to Listen",
-      category: "Interactive Design",
-      description: "An exhibition of interactive textiles that narrate the testimonies of the women that sewed them.",
-      tags: ["Interactive", "Exhibition", "Design"],
-      image: "/api/placeholder/600/400",
-      additionalImages: ["/api/placeholder/600/400", "/api/placeholder/600/400"],
-      fullImage: "/api/placeholder/1200/800"
-    },
-    {
-      id: 4,
-      title: "Asterism",
-      category: "Interactive Design",
-      description: "An interactive lighting installation that responds to movement and sound.",
-      tags: ["Interactive", "Installation", "IoT"],
-      image: "/api/placeholder/600/400",
-      additionalImages: ["/api/placeholder/600/400", "/api/placeholder/600/400"],
-      fullImage: "/api/placeholder/1200/800"
-    },
-    {
-      id: 5,
-      title: "Web Literacy Course",
-      category: "Education",
-      description: "Web development curriculum and interactive learning platform.",
-      tags: ["Education", "JavaScript", "React"],
-      image: "/api/placeholder/600/400",
-      additionalImages: ["/api/placeholder/600/400", "/api/placeholder/600/400"],
-      fullImage: "/api/placeholder/1200/800"
-    },
-    {
-      id: 6,
-      title: "Interactive Typography",
-      category: "Design",
-      description: "Interactive type design experiment exploring dynamic letterforms.",
-      tags: ["Typography", "Interactive", "Design"],
-      image: "/api/placeholder/600/400",
-      additionalImages: ["/api/placeholder/600/400", "/api/placeholder/600/400"],
-      fullImage: "/api/placeholder/1200/800"
-    }
-  ];
-
-  // Handle project click with updated router
-  const handleProjectClick = (project: Project) => {
-    router.push(`/project/${project.id}`);
-  };
-
   // Animación fadeInUp para secciones
   const fadeInUp = {
     hidden: { opacity: 0, y: 50 },
@@ -183,69 +97,6 @@ export default function ModernPortfolio() {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const projectItemVariants = {
-    initial: { opacity: 0, y: 50 },
-    animate: { 
-      opacity: 1, 
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
-    },
-    hover: {
-      y: -10,
-      transition: { duration: 0.3, ease: "easeOut" }
-    }
-  };
-  
-  const imageVariants = {
-    initial: { 
-      scale: 1,
-      rotate: 0,
-      translateX: 0,
-      translateY: 0,
-      filter: "brightness(1)"
-    },
-    hover: { 
-      scale: 1.05,
-      rotate: 2,
-      translateX: -15,
-      translateY: -15,
-      filter: "brightness(1.1)",
-      transition: { duration: 0.4, ease: "easeOut" }
-    }
-  };
-  
-  const secondImageVariants = {
-    initial: { 
-      opacity: 0,
-      translateX: 0,
-      translateY: 0,
-      rotate: 0
-    },
-    hover: { 
-      opacity: 1,
-      translateX: 30,
-      translateY: 40,
-      rotate: -3,
-      transition: { duration: 0.5, ease: "easeOut", delay: 0.1 }
-    }
-  };
-  
-  const thirdImageVariants = {
-    initial: { 
-      opacity: 0,
-      translateX: 0,
-      translateY: 0,
-      rotate: 0
-    },
-    hover: { 
-      opacity: 1,
-      translateX: -20,
-      translateY: 50,
-      rotate: 5,
-      transition: { duration: 0.5, ease: "easeOut", delay: 0.2 }
     }
   };
 
@@ -395,37 +246,37 @@ export default function ModernPortfolio() {
                 </div>
                 
                 <motion.div 
-  initial={{ opacity: 0, scale: 0.8 }}
-  animate={{ opacity: 1, scale: 1 }}
-  transition={{ delay: 2.8, duration: 0.8 }}
-  className="md:w-1/2 mt-12 md:mt-0 flex justify-center"
->
-  <div className="relative">
-    {/* Fondo morado circular */}
-    <div className={`w-64 h-64 md:w-80 md:h-80 rounded-full border-4 ${borderClass} bg-gradient-to-br from-indigo-500 to-purple-600 opacity-20 absolute top-0 left-0 z-0`} />
-    
-    {/* Imagen de perfil por encima */}
-    <div className="w-64 h-64 md:w-80 md:h-80 relative z-10">
-      <img 
-        src="/Profile.png" 
-        alt="Profile Picture" 
-        className="w-full h-full object-cover rounded-full object-center object-[center_20%]"
-      />
-    </div>
-  </div>
-</motion.div>
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 2.8, duration: 0.8 }}
+                  className="md:w-1/2 mt-12 md:mt-0 flex justify-center"
+                >
+                  <div className="relative">
+                    {/* Fondo morado circular */}
+                    <div className={`w-64 h-64 md:w-80 md:h-80 rounded-full border-4 ${borderClass} bg-gradient-to-br from-indigo-500 to-purple-600 opacity-20 absolute top-0 left-0 z-0`} />
+                    
+                    {/* Imagen de perfil por encima */}
+                    <div className="w-64 h-64 md:w-80 md:h-80 relative z-10">
+                      <img 
+                        src="/Profile.png" 
+                        alt="Profile Picture" 
+                        className="w-full h-full object-cover rounded-full object-center object-[center_15%]"
+                      />
+                    </div>
+                  </div>
+                </motion.div>
             </div>
           </div>
         </section>
 
         {/* Projects Section */}
-        <ProjectsSection 
-          darkMode={darkMode} 
-          projects={projects} 
-          projectsInView={projectsInView} 
-        />
+        <div ref={projectsRef}>
+          <ProjectsSection 
+            darkMode={darkMode} 
+            projectsInView={projectsInView} 
+          />
+        </div>
 
-        {/* Resto de secciones igual que antes... */}
         {/* PROFILE SECTION */}
         <section
           ref={profileRef}
@@ -621,7 +472,7 @@ export default function ModernPortfolio() {
                 Interested in working together? Feel free to reach out through any of the following channels.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-                <a href="jj.diazorg@gmail.com" className="group">
+                <a href="mailto:jj.diazorg@gmail.com" className="group">
                   <div className={`p-4 border ${borderClass} rounded-lg group-hover:border-indigo-500 transition-colors`}>
                     <span className="block text-2xl mb-2">✉️</span>
                     <span className="block font-medium">Email</span>

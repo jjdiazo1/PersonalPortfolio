@@ -1,38 +1,48 @@
 'use client'
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
+import { Project } from '@/lib/ProjectsData';
 
-// Using the same Project interface as ModernPortfolio
-interface Project {
-  id: number;
-  title: string;
-  category: string;
-  description: string;
-  tags: string[];
-  image: string;
-  fullImage: string;
-  additionalImages: string[];
-  client?: string;
-  year?: string;
-  timeline?: string;
-  role?: string;
-  liveUrl?: string;
-}
-
-// Define props interface with correct typing
+// Define props interface
 interface ProjectsSectionProps {
   darkMode: boolean;
-  projects: Project[];
   projectsInView: boolean;
 }
 
 const ProjectsSection: React.FC<ProjectsSectionProps> = ({ 
   darkMode, 
-  projects, 
   projectsInView 
 }) => {
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
+  
+  // Load projects from ProjectsData service
+  useEffect(() => {
+    const loadProjects = async () => {
+      try {
+        const { getAllProjects } = await import('@/lib/ProjectsData');
+        const projectsData = await getAllProjects();
+        setProjects(projectsData);
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Error loading projects:', error);
+        setIsLoading(false);
+      }
+    };
+
+    loadProjects();
+  }, []);
+
+  // Navigate to project detail page
+  const handleProjectClick = (projectId: number) => {
+    router.push(`/project/${projectId}`);
+  };
+
   const secondaryTextClass = darkMode ? 'text-gray-400' : 'text-gray-600';
+  const borderClass = darkMode ? 'border-gray-800' : 'border-gray-200';
   
   // Animation variants
   const fadeInUp = {
@@ -44,10 +54,20 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
     }
   };
 
+  if (isLoading) {
+    return (
+      <section id="projects" className="py-20 px-4 border-t border-b">
+        <div className="container mx-auto flex justify-center items-center h-64">
+          <div className="w-12 h-12 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section 
       id="projects" 
-      className="py-20 px-4 border-t border-b"
+      className={`py-20 px-4 border-t border-b ${borderClass}`}
     >
       <div className="container mx-auto">
         <motion.div 
@@ -62,239 +82,266 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
           </p>
         </motion.div>
         
-        {/* Projects grid - copying the reference design with group hover */}
+        {/* Projects grid - preserving the original design */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-20">
           {/* First Project - School of Architecture */}
-          <div className="relative mb-12 group">
-            {/* Images group with collapse-expand hover behavior */}
-            <div className="relative h-64 mb-6">
-              {/* Badge */}
-              <div className="absolute top-0 left-1/3 z-30 transform -translate-x-1/2">
-                <span className="inline-block px-3 py-1 text-xs font-medium rounded-full bg-indigo-500 text-white">
-                  Web Development
-                </span>
-              </div>
-              
-              {/* Main image */}
-              <motion.div 
-                className="absolute top-7 left-4 w-64 rounded-lg overflow-hidden shadow-md z-10
-                          group-hover:left-0 group-hover:-translate-y-2 transition-all duration-300"
-              >
-                <img 
-                  src={projects[0]?.image || "/api/placeholder/400/320"} 
-                  alt="School of Architecture Website"
-                  className="w-full h-full object-cover"
-                />
-              </motion.div>
-              
-              {/* Additional image 1 */}
-              <motion.div 
-                className="absolute top-16 right-8 w-44 h-32 rounded-lg overflow-hidden shadow-md z-20
-                          group-hover:right-0 group-hover:-translate-y-2 transition-all duration-300"
-              >
-                <img 
-                  src={projects[0]?.additionalImages?.[0] || "/api/placeholder/400/320"} 
-                  alt="School of Architecture Website additional view"
-                  className="w-full h-full object-cover"
-                />
-              </motion.div>
-              
-              {/* Additional image 2 */}
-              <motion.div 
-                className="absolute top-40 left-16 w-36 h-28 rounded-lg overflow-hidden shadow-md z-20
-                          group-hover:left-10 group-hover:translate-y-1 transition-all duration-300"
-              >
-                <img 
-                  src={projects[0]?.additionalImages?.[1] || "/api/placeholder/400/320"} 
-                  alt="School of Architecture Website third view"
-                  className="w-full h-full object-cover"
-                />
-              </motion.div>
-            </div>
-            
-            {/* Project details */}
-            <div>
-              <h3 className="text-xl font-bold text-indigo-500 mb-2">School of Architecture Website</h3>
-              <p className={`${secondaryTextClass} mb-3 text-sm`}>
-                Design & development of the official website for the School of Architecture and Design at Uniandes.
-              </p>
-              
-              {/* Tags */}
-              <div className="flex flex-wrap gap-2 mb-4">
-                {["React", "NextJS", "Tailwind"].map(tag => (
-                  <span key={tag} className={`text-xs px-3 py-1 rounded-full ${darkMode ? 'bg-gray-800' : 'bg-gray-100'}`}>
-                    {tag}
+          {projects[0] && (
+            <div 
+              className="relative mb-12 group cursor-pointer" 
+              onClick={() => handleProjectClick(projects[0].id)}
+            >
+              {/* Images group with collapse-expand hover behavior */}
+              <div className="relative h-64 mb-6">
+                {/* Badge */}
+                <div className="absolute top-0 left-1/3 z-30 transform -translate-x-1/2">
+                  <span className="inline-block px-3 py-1 text-xs font-medium rounded-full bg-indigo-500 text-white">
+                    {projects[0].category}
                   </span>
-                ))}
+                </div>
+                
+                {/* Main image */}
+                <motion.div 
+                  className="absolute top-7 left-4 w-64 rounded-lg overflow-hidden shadow-md z-10
+                            group-hover:left-0 group-hover:-translate-y-2 transition-all duration-300"
+                >
+                  <img 
+                    src={projects[0].image || "/api/placeholder/400/320"} 
+                    alt={projects[0].title}
+                    className="w-full h-full object-cover"
+                  />
+                </motion.div>
+                
+                {/* Additional image 1 */}
+                {projects[0].additionalImages?.length > 0 && (
+                  <motion.div 
+                    className="absolute top-16 right-8 w-44 h-32 rounded-lg overflow-hidden shadow-md z-20
+                              group-hover:right-0 group-hover:-translate-y-2 transition-all duration-300"
+                  >
+                    <img 
+                      src={projects[0].additionalImages[0] || "/api/placeholder/400/320"} 
+                      alt={`${projects[0].title} additional view`}
+                      className="w-full h-full object-cover"
+                    />
+                  </motion.div>
+                )}
+                
+                {/* Additional image 2 */}
+                {projects[0].additionalImages?.length > 1 && (
+                  <motion.div 
+                    className="absolute top-40 left-16 w-36 h-28 rounded-lg overflow-hidden shadow-md z-20
+                              group-hover:left-10 group-hover:translate-y-1 transition-all duration-300"
+                  >
+                    <img 
+                      src={projects[0].additionalImages[1] || "/api/placeholder/400/320"} 
+                      alt={`${projects[0].title} third view`}
+                      className="w-full h-full object-cover"
+                    />
+                  </motion.div>
+                )}
               </div>
               
-              {/* View project link */}
-              <motion.a
-                className="inline-flex items-center text-sm font-medium text-indigo-500 hover:text-indigo-600 transition-colors"
-                whileHover={{ x: 5 }}
-                transition={{ duration: 0.2 }}
-              >
-                View Project
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                </svg>
-              </motion.a>
+              {/* Project details */}
+              <div>
+                <h3 className="text-xl font-bold text-indigo-500 mb-2">{projects[0].title}</h3>
+                <p className={`${secondaryTextClass} mb-3 text-sm`}>
+                  {projects[0].description}
+                </p>
+                
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {projects[0].tags.slice(0, 3).map(tag => (
+                    <span key={tag} className={`text-xs px-3 py-1 rounded-full ${darkMode ? 'bg-gray-800' : 'bg-gray-100'}`}>
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                
+                {/* View project link */}
+                <motion.div
+                  className="inline-flex items-center text-sm font-medium text-indigo-500 hover:text-indigo-600 transition-colors"
+                  whileHover={{ x: 5 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  View Project
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                </motion.div>
+              </div>
             </div>
-          </div>
+          )}
           
           {/* Second Project - Pavilion Website */}
-          <div className="relative mb-12 group">
-            <div className="relative h-64 mb-6">
-              {/* Badge */}
-              <div className="absolute top-0 right-1/4 z-30 transform translate-x-1/2">
-                <span className="inline-block px-3 py-1 text-xs font-medium rounded-full bg-indigo-500 text-white">
-                  Web Design
-                </span>
-              </div>
-              
-              {/* Main image (larger, centered) */}
-              <motion.div 
-                className="absolute top-5 right-4 w-72 h-48 rounded-lg overflow-hidden shadow-md z-20
-                          group-hover:right-0 group-hover:-translate-y-2 transition-all duration-300"
-              >
-                <img 
-                  src={projects[1]?.image || "/api/placeholder/400/320"} 
-                  alt="Pavilion Website"
-                  className="w-full h-full object-cover"
-                />
-              </motion.div>
-              
-              {/* Additional image - Pilos logo */}
-              <motion.div 
-                className="absolute top-28 left-4 w-32 h-32 rounded-lg overflow-hidden shadow-md z-10
-                          group-hover:left-0 group-hover:translate-y-1 transition-all duration-300"
-              >
-                <img 
-                  src={projects[1]?.additionalImages?.[0] || "/Pilos.jpg"} 
-                  alt="Pavilion additional view"
-                  className="w-full h-full object-cover"
-                />
-              </motion.div>
-              
-              {/* Additional image - Hotel */}
-              <motion.div 
-                className="absolute bottom-0 right-16 w-44 h-32 rounded-lg overflow-hidden shadow-md z-10
-                          group-hover:right-10 group-hover:translate-y-2 transition-all duration-300"
-              >
-                <img 
-                  src={projects[1]?.additionalImages?.[1] || "/Hotel.png"} 
-                  alt="Pavilion third view"
-                  className="w-full h-full object-cover"
-                />
-              </motion.div>
-            </div>
-            
-            {/* Project details */}
-            <div>
-              <h3 className="text-xl font-bold text-indigo-500 mb-2">Pavilion Website & Branding</h3>
-              <p className={`${secondaryTextClass} mb-3 text-sm`}>
-                Website & branding for an academic conference directed at creatives from all around the globe.
-              </p>
-              
-              {/* Tags */}
-              <div className="flex flex-wrap gap-2 mb-4">
-                {["Branding", "UI/UX", "Web Design"].map(tag => (
-                  <span key={tag} className={`text-xs px-3 py-1 rounded-full ${darkMode ? 'bg-gray-800' : 'bg-gray-100'}`}>
-                    {tag}
+          {projects[1] && (
+            <div 
+              className="relative mb-12 group cursor-pointer" 
+              onClick={() => handleProjectClick(projects[1].id)}
+            >
+              <div className="relative h-64 mb-6">
+                {/* Badge */}
+                <div className="absolute top-0 right-1/4 z-30 transform translate-x-1/2">
+                  <span className="inline-block px-3 py-1 text-xs font-medium rounded-full bg-indigo-500 text-white">
+                    {projects[1].category}
                   </span>
-                ))}
+                </div>
+                
+                {/* Main image (larger, centered) */}
+                <motion.div 
+                  className="absolute top-5 right-4 w-72 h-48 rounded-lg overflow-hidden shadow-md z-20
+                            group-hover:right-0 group-hover:-translate-y-2 transition-all duration-300"
+                >
+                  <img 
+                    src={projects[1].image || "/api/placeholder/400/320"} 
+                    alt={projects[1].title}
+                    className="w-full h-full object-cover"
+                  />
+                </motion.div>
+                
+                {/* Additional image 1 */}
+                {projects[1].additionalImages?.length > 0 && (
+                  <motion.div 
+                    className="absolute top-28 left-4 w-32 h-32 rounded-lg overflow-hidden shadow-md z-10
+                              group-hover:left-0 group-hover:translate-y-1 transition-all duration-300"
+                  >
+                    <img 
+                      src={projects[1].additionalImages[0] || "/Pilos.jpg"} 
+                      alt={`${projects[1].title} additional view`}
+                      className="w-full h-full object-cover"
+                    />
+                  </motion.div>
+                )}
+                
+                {/* Additional image 2 */}
+                {projects[1].additionalImages?.length > 1 && (
+                  <motion.div 
+                    className="absolute bottom-0 right-16 w-44 h-32 rounded-lg overflow-hidden shadow-md z-10
+                              group-hover:right-10 group-hover:translate-y-2 transition-all duration-300"
+                  >
+                    <img 
+                      src={projects[1].additionalImages[1] || "/Hotel.png"} 
+                      alt={`${projects[1].title} third view`}
+                      className="w-full h-full object-cover"
+                    />
+                  </motion.div>
+                )}
               </div>
               
-              {/* View project link */}
-              <motion.a
-                className="inline-flex items-center text-sm font-medium text-indigo-500 hover:text-indigo-600 transition-colors"
-                whileHover={{ x: 5 }}
-                transition={{ duration: 0.2 }}
-              >
-                View Project
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                </svg>
-              </motion.a>
+              {/* Project details */}
+              <div>
+                <h3 className="text-xl font-bold text-indigo-500 mb-2">{projects[1].title}</h3>
+                <p className={`${secondaryTextClass} mb-3 text-sm`}>
+                  {projects[1].description}
+                </p>
+                
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {projects[1].tags.slice(0, 3).map(tag => (
+                    <span key={tag} className={`text-xs px-3 py-1 rounded-full ${darkMode ? 'bg-gray-800' : 'bg-gray-100'}`}>
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                
+                {/* View project link */}
+                <motion.div
+                  className="inline-flex items-center text-sm font-medium text-indigo-500 hover:text-indigo-600 transition-colors"
+                  whileHover={{ x: 5 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  View Project
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                </motion.div>
+              </div>
             </div>
-          </div>
+          )}
           
           {/* Third Project - Times to Listen */}
-          <div className="relative mb-12 group">
-            <div className="relative h-64 mb-6">
-              {/* Badge */}
-              <div className="absolute top-0 right-1/3 z-30 transform translate-x-1/2">
-                <span className="inline-block px-3 py-1 text-xs font-medium rounded-full bg-indigo-500 text-white">
-                  Interactive Design
-                </span>
-              </div>
-              
-              {/* Main image */}
-              <motion.div 
-                className="absolute top-7 right-4 w-64 rounded-lg overflow-hidden shadow-md z-10
-                          group-hover:right-0 group-hover:-translate-y-2 transition-all duration-300"
-              >
-                <img 
-                  src={projects[2]?.image || "/api/placeholder/400/320"} 
-                  alt="Times to Listen"
-                  className="w-full h-full object-cover"
-                />
-              </motion.div>
-              
-              {/* Additional image 1 */}
-              <motion.div 
-                className="absolute top-20 left-2 w-40 h-36 rounded-lg overflow-hidden shadow-md z-20
-                           group-hover:left-0 group-hover:-translate-y-2 transition-all duration-300"
-              >
-                <img 
-                  src={projects[2]?.additionalImages?.[0] || "/api/placeholder/400/320"} 
-                  alt="Times to Listen additional view"
-                  className="w-full h-full object-cover"
-                />
-              </motion.div>
-              
-              {/* Additional image 2 */}
-              <motion.div 
-                className="absolute bottom-0 right-20 w-36 h-28 rounded-lg overflow-hidden shadow-md z-20
-                          group-hover:right-16 group-hover:translate-y-2 transition-all duration-300"
-              >
-                <img 
-                  src={projects[2]?.additionalImages?.[1] || "/api/placeholder/400/320"} 
-                  alt="Times to Listen third view"
-                  className="w-full h-full object-cover"
-                />
-              </motion.div>
-            </div>
-            
-            {/* Project details */}
-            <div>
-              <h3 className="text-xl font-bold text-indigo-500 mb-2">Times to Listen</h3>
-              <p className={`${secondaryTextClass} mb-3 text-sm`}>
-                An exhibition of interactive textiles that narrate the testimonies of the women that sewed them.
-              </p>
-              
-              {/* Tags */}
-              <div className="flex flex-wrap gap-2 mb-4">
-                {["Interactive", "Exhibition", "Design"].map(tag => (
-                  <span key={tag} className={`text-xs px-3 py-1 rounded-full ${darkMode ? 'bg-gray-800' : 'bg-gray-100'}`}>
-                    {tag}
+          {projects[2] && (
+            <div 
+              className="relative mb-12 group cursor-pointer" 
+              onClick={() => handleProjectClick(projects[2].id)}
+            >
+              <div className="relative h-64 mb-6">
+                {/* Badge */}
+                <div className="absolute top-0 right-1/3 z-30 transform translate-x-1/2">
+                  <span className="inline-block px-3 py-1 text-xs font-medium rounded-full bg-indigo-500 text-white">
+                    {projects[2].category}
                   </span>
-                ))}
+                </div>
+                
+                {/* Main image */}
+                <motion.div 
+                  className="absolute top-7 right-4 w-64 rounded-lg overflow-hidden shadow-md z-10
+                            group-hover:right-0 group-hover:-translate-y-2 transition-all duration-300"
+                >
+                  <img 
+                    src={projects[2].image || "/api/placeholder/400/320"} 
+                    alt={projects[2].title}
+                    className="w-full h-full object-cover"
+                  />
+                </motion.div>
+                
+                {/* Additional image 1 */}
+                {projects[2].additionalImages?.length > 0 && (
+                  <motion.div 
+                    className="absolute top-20 left-2 w-40 h-36 rounded-lg overflow-hidden shadow-md z-20
+                               group-hover:left-0 group-hover:-translate-y-2 transition-all duration-300"
+                  >
+                    <img 
+                      src={projects[2].additionalImages[0] || "/api/placeholder/400/320"} 
+                      alt={`${projects[2].title} additional view`}
+                      className="w-full h-full object-cover"
+                    />
+                  </motion.div>
+                )}
+                
+                {/* Additional image 2 */}
+                {projects[2].additionalImages?.length > 1 && (
+                  <motion.div 
+                    className="absolute bottom-0 right-20 w-36 h-28 rounded-lg overflow-hidden shadow-md z-20
+                              group-hover:right-16 group-hover:translate-y-2 transition-all duration-300"
+                  >
+                    <img 
+                      src={projects[2].additionalImages[1] || "/api/placeholder/400/320"} 
+                      alt={`${projects[2].title} third view`}
+                      className="w-full h-full object-cover"
+                    />
+                  </motion.div>
+                )}
               </div>
               
-              {/* View project link */}
-              <motion.a
-                className="inline-flex items-center text-sm font-medium text-indigo-500 hover:text-indigo-600 transition-colors"
-                whileHover={{ x: 5 }}
-                transition={{ duration: 0.2 }}
-              >
-                View Project
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                </svg>
-              </motion.a>
+              {/* Project details */}
+              <div>
+                <h3 className="text-xl font-bold text-indigo-500 mb-2">{projects[2].title}</h3>
+                <p className={`${secondaryTextClass} mb-3 text-sm`}>
+                  {projects[2].description}
+                </p>
+                
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {projects[2].tags.slice(0, 3).map(tag => (
+                    <span key={tag} className={`text-xs px-3 py-1 rounded-full ${darkMode ? 'bg-gray-800' : 'bg-gray-100'}`}>
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                
+                {/* View project link */}
+                <motion.div
+                  className="inline-flex items-center text-sm font-medium text-indigo-500 hover:text-indigo-600 transition-colors"
+                  whileHover={{ x: 5 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  View Project
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                </motion.div>
+              </div>
             </div>
-          </div>
+          )}
           
           {/* Remaining projects with dynamic creation and custom layouts */}
           {projects.slice(3).map((project, index) => {
@@ -323,7 +370,11 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
             const style = layoutStyles[index % layoutStyles.length];
             
             return (
-              <div key={project.id} className="relative mb-12 group">
+              <div 
+                key={project.id} 
+                className="relative mb-12 group cursor-pointer"
+                onClick={() => handleProjectClick(project.id)}
+              >
                 <div className="relative h-64 mb-6">
                   {/* Badge */}
                   <div className="absolute top-0 left-1/2 z-30 transform -translate-x-1/2">
@@ -344,7 +395,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                   </motion.div>
                   
                   {/* Additional image 1 */}
-                  {project.additionalImages && project.additionalImages[0] && (
+                  {project.additionalImages?.length > 0 && (
                     <motion.div 
                       className={`absolute ${style.addImage1} rounded-lg overflow-hidden shadow-md z-20 transition-all duration-300`}
                     >
@@ -357,7 +408,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                   )}
                   
                   {/* Additional image 2 */}
-                  {project.additionalImages && project.additionalImages[1] && (
+                  {project.additionalImages?.length > 1 && (
                     <motion.div 
                       className={`absolute ${style.addImage2} rounded-lg overflow-hidden shadow-md z-20 transition-all duration-300`}
                     >
@@ -387,7 +438,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                   </div>
                   
                   {/* View project link */}
-                  <motion.a
+                  <motion.div
                     className="inline-flex items-center text-sm font-medium text-indigo-500 hover:text-indigo-600 transition-colors"
                     whileHover={{ x: 5 }}
                     transition={{ duration: 0.2 }}
@@ -396,7 +447,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                     </svg>
-                  </motion.a>
+                  </motion.div>
                 </div>
               </div>
             );
