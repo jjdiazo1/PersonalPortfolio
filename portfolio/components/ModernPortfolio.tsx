@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useInView } from 'react-intersection-observer';
+import ProjectsSection from './ProjectsSection';
 
 // Definición del tipo Project
 interface Project {
@@ -417,109 +418,12 @@ export default function ModernPortfolio() {
           </div>
         </section>
 
-{/* Projects Section */}
-<section 
-  ref={projectsRef}
-  id="projects" 
-  className="py-20 px-4 border-t border-b"
->
-  <div className="container mx-auto">
-    <motion.div 
-      variants={fadeInUp}
-      initial="hidden"
-      animate={projectsInView ? "visible" : "hidden"}
-      className="text-center mb-16"
-    >
-      <h2 className="text-4xl font-bold mb-4">Projects</h2>
-      <p className={`max-w-xl mx-auto ${secondaryTextClass}`}>
-        A showcase of my recent work, designs, and creative explorations.
-      </p>
-    </motion.div>
-    
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
-      {projects.map((project, index) => (
-        <motion.div
-          key={project.id}
-          variants={fadeInUp}
-          initial="hidden"
-          animate={projectsInView ? "visible" : "hidden"}
-          transition={{ delay: index * 0.1 }}
-          className="relative cursor-pointer"
-        >
-          {/* Creative stacked images layout */}
-          <div className="relative h-72 mb-6">
-            {/* Main project image */}
-            <div className="absolute z-10 w-full h-full transform transition-all duration-500 hover:-translate-x-2 hover:-translate-y-2 hover:rotate-1">
-              <img 
-                src={project.image} 
-                alt={project.title}
-                className="w-full h-full object-cover rounded-lg shadow-md"
-              />
-              
-              {/* Category badge */}
-              <div className="absolute top-3 right-3">
-                <span className="inline-block px-3 py-1 text-xs font-medium rounded-full bg-indigo-500 text-white">
-                  {project.category}
-                </span>
-              </div>
-            </div>
-            
-            {/* Additional image 1 - positioned to the side */}
-            {project.additionalImages && project.additionalImages[0] && (
-              <div className="absolute top-6 -right-8 w-32 h-32 transform transition-all duration-500 hover:scale-105 z-0">
-                <img 
-                  src={project.additionalImages[0]} 
-                  alt={`${project.title} additional view`}
-                  className="w-full h-full object-cover rounded-lg shadow-md"
-                />
-              </div>
-            )}
-            
-            {/* Additional image 2 - positioned to bottom left */}
-            {project.additionalImages && project.additionalImages[1] && (
-              <div className="absolute -bottom-4 -left-6 w-28 h-28 transform transition-all duration-500 hover:scale-105 z-0">
-                <img 
-                  src={project.additionalImages[1]} 
-                  alt={`${project.title} third view`}
-                  className="w-full h-full object-cover rounded-lg shadow-md"
-                />
-              </div>
-            )}
-          </div>
-          
-          {/* Project information - below the images */}
-          <div>
-            <h3 className="text-xl font-bold text-indigo-500 mb-2">{project.title}</h3>
-            <p className={`${secondaryTextClass} mb-3 text-sm`}>
-              {project.description}
-            </p>
-            
-            {/* Tags as pills */}
-            <div className="flex flex-wrap gap-2 mb-4">
-              {project.tags.slice(0, 3).map(tag => (
-                <span key={tag} className={`text-xs px-3 py-1 rounded-full ${darkMode ? 'bg-gray-800' : 'bg-gray-100'}`}>
-                  {tag}
-                </span>
-              ))}
-            </div>
-            
-            {/* View project link */}
-            <motion.a
-              className="inline-flex items-center text-sm font-medium text-indigo-500 hover:text-indigo-600 transition-colors"
-              whileHover={{ x: 5 }}
-              transition={{ duration: 0.2 }}
-            >
-              View Project
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-              </svg>
-            </motion.a>
-          </div>
-        </motion.div>
-      ))}
-    </div>
-  </div>
-</section>
+        {/* Projects Section */}
+        <ProjectsSection 
+          darkMode={darkMode} 
+          projects={projects} 
+          projectsInView={projectsInView} 
+        />
 
         {/* Resto de secciones igual que antes... */}
         {/* PROFILE SECTION */}
