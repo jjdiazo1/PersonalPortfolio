@@ -75,7 +75,7 @@
         "category": "Web Application / UX Design",
         "description": "A full-stack pet spa platform with booking, packages, and playful visuals.",
         "fullDescription": "Pawsitivity DogSpa is a web application designed to bring joy and convenience to pet owners by offering a seamless digital experience for booking spa services, exploring service packages, filtering locations, and browsing pet products. The platform features real-time package filtering by branch, interactive reservation management, and dynamic service previews with random dog images using DogAPI. Built with a user-centered design, the project emphasizes clarity, accessibility, and a touch of fun through canine-themed elements.",
-        "tags": ["Web App", "Angular", "Spring", "Pet Services", "UX/UI", "DogAPI"],
+        "tags": ["Website", "Angular", "Spring", "Pet Services", "UX/UI", "DogAPI"],
        "image": "/Project 5/1.png",
         "fullImage": "/Project 5/6.png",
         "additionalImages": ["/Project 5/2.png", "/Project 5/3.png", "/Project 5/3.jpg", "/Project 5/5.jpg"],
