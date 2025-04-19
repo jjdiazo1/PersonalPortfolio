@@ -70,7 +70,7 @@
         "liveUrl": "https://pandemic-simulator-game.vercel.app/register"
       },      
       {
-        "id": 5,
+        "id": 6,
         "title": "Pawsitivity DogSpa",
         "category": "Web Application / UX Design",
         "description": "A full-stack pet spa platform with booking, packages, and playful visuals.",
@@ -86,7 +86,7 @@
         "liveUrl": "https://dogspa.vercel.app"
       },      
       {
-        "id": 6,
+        "id": 5,
         "title": "ML for Biomedical Systems",
         "category": "Applied Machine Learning",
         "description": "Applied machine learning models for biomedical and environmental datasets.",

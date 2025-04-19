@@ -257,7 +257,7 @@ export default function ModernPortfolio() {
                       <img 
                         src="/Profile.png" 
                         alt="Profile Picture" 
-                        className="w-full h-full object-cover rounded-full object-center object-[center_15%]"
+                        className="w-full h-full object-cover rounded-full object-center object-[center_20%]"
                       />
                     </div>
                   </div>
