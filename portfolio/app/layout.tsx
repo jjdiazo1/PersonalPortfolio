@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Inter, Montserrat } from 'next/font/google';
 import "./globals.css";
 
 // Fuentes personalizadas
@@ -19,25 +20,27 @@ export const metadata: Metadata = {
   title: "Juan Jose Diaz - Portfolio",
   description: "Portafolio de Juan Jose Diaz, Systems and Computer Engineer.",
 };
+// Fonts
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const montserrat = Montserrat({ 
+  subsets: ['latin'], 
+  variable: '--font-montserrat',
+  display: 'swap',
+});
 
-// Layout principal
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-900 text-white`}
-      >
-        {/* Contenido principal */}
-        <main>{children}</main>
-
-        {/* Footer */}
-        <footer className="p-4 bg-black text-center text-sm text-gray-400">
-          © {new Date().getFullYear()} Juan Jose Diaz. Todos los derechos reservados.
-        </footer>
+    <html lang="en" className="scroll-smooth">
+      <head>
+        <title>Juan Jose Diaz | Portfolio</title>
+        <meta name="description" content="Systems and Computer Engineer with a passion for innovation" />
+      </head>
+      <body className={`${inter.variable} ${montserrat.variable} font-sans antialiased`}>
+        {children}
       </body>
     </html>
   );

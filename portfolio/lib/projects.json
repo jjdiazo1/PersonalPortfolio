@@ -1,0 +1,111 @@
+{
+    "projects": [
+    {
+        "id": 1,
+        "title": "UniMarket",
+        "category": "Product Design / Mobile Application",
+        "description": "A peer-to-peer campus marketplace for buying, selling, and trading academic resources.",
+        "fullDescription": "UniMarket is a student-driven marketplace designed to streamline the buying, selling, and trading of academic resources among university students. The platform solves the inefficiencies of social media groups by providing a secure, course-filtered, and verified transaction system. It incorporates features such as wishlist notifications, ask & offer dynamics, real-time chat, transaction tracking, smart filtering by major or course, and a multi-stream revenue model including sponsored listings and premium features.\n\nUniMarket also integrates Augmented Reality (AR) tools to help users measure product sizes before purchase, and includes AI-powered recommendations and context-aware features such as QR-based transaction confirmation that only succeeds when both devices are within Bluetooth range—ensuring physical presence and preventing fraud.\n\nDesigned for students, by students—UniMarket promotes cost-efficiency, sustainability, and trust on campus.",
+        "tags": ["Flutter", "Firebase", "Data-Driven", "Mobile App", "Marketplace", "UI/UX", "AR", "AI", "Context-Aware"],
+        "image": "/Project 1/1.png",
+        "fullImage": "/Project 1/1.png",
+        "additionalImages": ["/Project 1/7.png", "/Project 1/8.png", "/Project 1/3.png", "/Project 1/5.jpeg"],
+        "client": "Universidad de los Andes – Mobile Development Course",
+        "year": "2025",
+        "timeline": "5 months",
+        "role": "Flutter Developer & UI UX Designer",
+        "liveUrl": "https://github.com/ISIS-3510-G24/Wiki/wiki"
+        },          
+        {
+            "id": 2,
+            "title": "Early To Wear",
+            "category": "Digital Product / Fashion Tech",
+            "description": "A fashion discovery platform that redefines how Colombians discover and buy emerging fashion brands.",
+            "fullDescription": "Early To Wear was a fashion discovery web platform created to empower independent fashion brands and revolutionize how Colombians found, followed, and bought from them. The app addressed the lack of visibility and access for local fashion startups, offering an intuitive shopping experience tailored to user preferences. With features like curated collections, advanced style filtering, sustainable and second-hand categories, and smart recommendations, ETW helped users discover fashion that truly fit their identity—before anyone else.\n\nAlthough the platform is no longer live, the project successfully onboarded 6 emerging brands and provided us with invaluable insights into digital product design, community building, and brand acquisition strategies. Early To Wear was developed as part of the Universidad de los Andes Innovation Week 2024 and represented a hands-on exploration of how technology can empower creative industries in Latin America.",
+            "tags": ["Web Design", "Startup", "Marketplace", "Brand Discovery", "Fashion"],
+            "image": "/Project 2/6.png",
+            "fullImage": "/Project 2/1.png",
+            "additionalImages": ["/Project 2/2.png", "/Project 2/1.png", "/Project 2/4.png", "/Project 2/5.png"],
+            "client": "Universidad de los Andes – Innovation Week 2024",
+            "year": "2024",
+            "timeline": "4 months",
+            "role": "Founder, Product Owner, Developer",
+            "liveUrl": ""
+          },
+          {
+            "id": 3,
+            "title": "Hotel Juan María Website",
+            "category": "Web Development / Branding",
+            "description": "Redesign and development of the official website and brand identity for Hotel Juan María in Tuluá.",
+            "fullDescription": "This project involves the full redesign and development of the website for Hotel Juan María, a local hospitality business based in Tuluá, Colombia. As lead frontend developer, I built the site using Next.js and integrated a headless CMS to allow easy content management by hotel staff. The site is designed to be modern, responsive, and user-friendly, highlighting the hotel's services, rooms, and booking options. In addition to the development, we also led the redesign of the hotel's visual identity, including a new logo. While still in development, the platform aims to increase the hotel’s online visibility and improve the guest experience through digital transformation.",
+            "tags": ["Next.js", "Frontend", "CMS", "Branding", "Responsive Design", "In Progress"],
+            "image": "/Project 3/1.png",
+            "fullImage": "/Project 3/1.png",
+            "additionalImages": [
+              "/Project 3/6.png",
+              "/Project 3/2.png",
+              "/Project 3/4.jpeg",
+              "/Project 3/5.jpeg"
+            ],
+            "client": "Hotel Juan María, Tuluá",
+            "year": "2025",
+            "timeline": "Ongoing",
+            "role": "Frontend Developer & Brand Designer",
+            "liveUrl": ""
+          },          
+      {
+        "id": 4,
+        "title": "Immunity Network",
+        "category": "Game / Network Simulation",
+        "description": "An interactive simulation of how a pandemic spreads through a social network.",
+        "fullDescription": "Immunity Network is an educational interactive game developed for the course 'Games, Networks, and Complexity' at Universidad de Los Andes. It simulates the spread of a pandemic through a social network built by the players themselves. With real-time visualizations, vaccination strategies, and multiple game modes, participants explore concepts such as herd immunity, super-spreaders, and epidemic control. Designed to foster understanding of network theory and epidemiology in a collaborative and strategic setting.",
+        "tags": ["Educational", "Simulation", "Networks", "Interactive", "Epidemiology", "Game"],
+        "image": "/Project 4/1.png",
+        "fullImage": "/Project 4/5.png",
+        "additionalImages": ["/Project 4/2.png", "/Project 4/3.png", "/Project 4/1.png", "/Project 4/6.png"],
+        "client": "Universidad de Los Andes – Educational Project",
+        "year": "2025",
+        "timeline": "1 month",
+        "role": "Lead Game Designer & Developer",
+        "liveUrl": "https://pandemic-simulator-game.vercel.app/register"
+      },      
+      {
+        "id": 5,
+        "title": "Pawsitivity DogSpa",
+        "category": "Web Application / UX Design",
+        "description": "A full-stack pet spa platform with booking, packages, and playful visuals.",
+        "fullDescription": "Pawsitivity DogSpa is a web application designed to bring joy and convenience to pet owners by offering a seamless digital experience for booking spa services, exploring service packages, filtering locations, and browsing pet products. The platform features real-time package filtering by branch, interactive reservation management, and dynamic service previews with random dog images using DogAPI. Built with a user-centered design, the project emphasizes clarity, accessibility, and a touch of fun through canine-themed elements.",
+        "tags": ["Web App", "Angular", "Spring", "Pet Services", "UX/UI", "DogAPI"],
+       "image": "/Project 5/1.png",
+        "fullImage": "/Project 5/6.png",
+        "additionalImages": ["/Project 5/2.png", "/Project 5/3.png", "/Project 5/3.jpg", "/Project 5/5.jpg"],
+        "client": "Academic Project – Universidad de Los Andes",
+        "year": "2025",
+        "timeline": "2 months",
+        "role": "Frontend Developer & UX Designer",
+        "liveUrl": "https://dogspa.vercel.app"
+      },      
+      {
+        "id": 6,
+        "title": "ML for Biomedical Systems",
+        "category": "Applied Machine Learning",
+        "description": "Applied machine learning models for biomedical and environmental datasets.",
+        "fullDescription": "This is a compilation of academic projects developed for the Fundamentals of Machine Learning course in the Biomedical Engineering program. The goal was to explore and implement core machine learning algorithms using real-world datasets provided by the department. The project includes models for linear and polynomial regression, logistic regression, clustering (K-means), and feedforward neural networks. Applications range from greenhouse climate analysis to medical patient clustering and binary classification tasks. \n\nEach model was implemented from scratch in Python, focusing on visual interpretation, parameter estimation, and decision boundary generation. The project allowed for a deep understanding of ML fundamentals and their relevance to biomedical and environmental problem-solving.",
+        "tags": ["Python", "Machine Learning", "Biomedical", "Regression", "K-Means", "Neural Networks"],
+        "image": "/Project 6/1.png",
+        "fullImage": "/Project 6/2.png",
+        "additionalImages": [
+          "/Project 6/3.png",
+          "/Project 6/4.png",
+          "/Project 6/5.png",
+          "/Project 6/1.png"
+        ],
+        "client": "Universidad de los Andes – Biomedical Engineering Dept.",
+        "year": "2024",
+        "timeline": "2 months",
+        "role": "ML Engineer & Visual Analyst",
+        "liveUrl": ""
+      }
+      
+    ]
+  }
