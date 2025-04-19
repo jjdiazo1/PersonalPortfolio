@@ -204,7 +204,7 @@ export default function ModernPortfolio() {
                   transition={{ delay: 2.2, duration: 0.8 }}
                   className="text-5xl md:text-6xl lg:text-7xl font-bold"
                 >
-                  Juan Jose <span className="text-indigo-500">Diaz</span>
+                  Juan José <span className="text-indigo-500">Díaz</span>
                 </motion.h1>
                 
                 <motion.div
