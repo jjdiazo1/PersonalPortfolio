@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -23,10 +23,7 @@ export default function ModernPortfolio() {
   const [languagesRef, languagesInView] = useInView({ triggerOnce: true, threshold: 0.3 });
   const [educationRef, educationInView] = useInView({ triggerOnce: true, threshold: 0.3 });
   const [experienceRef, experienceInView] = useInView({ triggerOnce: true, threshold: 0.3 });
-  
-  // Use router correctly with Next.js App Router
-  const router = useRouter();
-  
+    
   // Verificar que estamos en el cliente antes de usar funcionalidades del cliente
   useEffect(() => {
     setMounted(true);
