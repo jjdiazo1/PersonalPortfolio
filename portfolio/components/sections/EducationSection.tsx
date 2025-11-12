@@ -53,7 +53,7 @@ export default function EducationSection({ darkMode }: EducationSectionProps) {
               className={`border ${borderClass} p-8 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col md:flex-row items-center gap-6`}
             >
               <div className="h-20 w-20 flex-shrink-0 rounded-lg overflow-hidden border">
-                <img src={school.logo} alt={school.name} className="object-cover w-full h-full" />
+                <img src={school.logo} alt={school.name} className="object-contain w-full h-full" />
               </div>
               <div>
                 <h3 className="font-bold text-2xl uppercase mb-2">{school.name}</h3>

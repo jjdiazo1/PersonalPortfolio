@@ -96,7 +96,7 @@ export default function ExperienceSection({ darkMode }: ExperienceSectionProps) 
                   whileHover={{ rotate: 5, scale: 1.05 }}
                   className={`h-24 w-24 rounded-lg border ${borderClass} flex items-center justify-center overflow-hidden shadow-sm`}
                 >
-                  <img src={job.logo} alt="Company Logo" className="object-cover w-full h-full" />
+                  <img src={job.logo} alt="Company Logo" className="object-contain w-full h-full" />
                 </motion.div>
               </div>
             </motion.div>
