@@ -10,47 +10,96 @@ export default function ExperienceSection({ darkMode }: ExperienceSectionProps) 
   const borderClass = darkMode ? 'border-gray-800' : 'border-gray-200';
   const secondaryTextClass = darkMode ? 'text-gray-400' : 'text-gray-600';
 
-  const jobs = [
-    {
-      title: "Graphic Designer - Pilos Creativos",
-      period: "Jan 2022 - Apr 2022",
-      tasks: [
-        "Designed custom graphics as per client requests.",
-        "Managed social media pages & created innovative posts."
-      ],
-      logo: "/Pilos.jpg"
-    },
-    {
-      title: "Translator - Juan Maria Hotel",
-      period: "Nov 2019 - Jan 2020",
-      tasks: [
-        "Provided translation services to international clientele.",
-        "Enhanced hotel's catalog & updated visual materials."
-      ],
-      logo: "/Hotel.png"
-    }
-  ];
+ const jobs = [
+  {
+    title: "Co-Founder & AI Developer",
+    company: "Early to Wear",
+    period: "Mar 2024 - Present",
+    location: "Lyon, France (Hybrid)",
+    tasks: [
+      "Built an AI-powered fashion recommendation platform integrating image embeddings and vector databases.",
+      "Developed the frontend with Next.js and the backend using Python and FastAPI.",
+      "Worked on AI models for trend analysis and personalized outfit generation."
+    ],
+    logo: "/Logos/etw.png"
+  },
+  {
+    title: "Teaching Assistant – Mobile Application Development (iOS)",
+    company: "Universidad de los Andes - Colombia",
+    period: "Aug 2025 - Present",
+    location: "Remote",
+    tasks: [
+      "Focused on building cross-platform apps using Flutter (Dart) and native iOS (Swift).",
+      "Assisted students in debugging and improving mobile app performance.",
+      "Supported the design and implementation of best UI/UX practices in apps."
+    ],
+    logo: "/Logos/uniandes.png"
+  },
+  {
+    title: "Full Stack Developer",
+    company: "Hotel Juan María",
+    period: "Dec 2024 - Aug 2025",
+    location: "Remote",
+    tasks: [
+      "Developed and maintained web systems using Next.js and Payload CMS.",
+      "Integrated database solutions and optimized site performance.",
+      "Contributed to improving the hotel's digital experience for clients."
+    ],
+    logo: "/Logos/Hotel.png"
+  },
+  {
+    title: "Graphic Designer",
+    company: "Pilos Creativos",
+    period: "Jan 2022 - Apr 2022",
+    location: "Tuluá, Valle del Cauca, Colombia (On-site)",
+    tasks: [
+      "Designed custom graphics and marketing materials per client requests.",
+      "Managed social media presence and created innovative digital campaigns."
+    ],
+    logo: "/Logos/Pilos.jpg"
+  }
+];
+
 
   return (
     <section id="experience" className={`py-20 px-4 border-b ${borderClass}`}>
-      <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-3xl mx-auto">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="max-w-3xl mx-auto"
+      >
         <h2 className="text-4xl font-bold text-center mb-12">Experience</h2>
-        <div className="grid grid-cols-1 gap-6">
-          {jobs.map(job => (
-            <div key={job.title} className={`border ${borderClass} p-6 rounded-lg hover:scale-[1.02] transition-transform`}>
-              <div className="flex flex-wrap">
-                <div className="w-full md:w-3/4 pr-0 md:pr-8">
+        <div className="grid grid-cols-1 gap-8">
+          {jobs.map((job, i) => (
+            <motion.div
+              key={job.title}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.2, duration: 0.6 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.03, rotateX: 2 }}
+              className={`border ${borderClass} p-8 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300`}
+            >
+              <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div className="flex-1">
                   <h3 className="font-bold text-xl uppercase mb-1">{job.title}</h3>
                   <p className={`text-sm ${secondaryTextClass} mb-4`}>{job.period}</p>
-                  <ul className="list-disc pl-5 space-y-1">{job.tasks.map(task => <li key={task}>{task}</li>)}</ul>
+                  <ul className="list-disc pl-5 space-y-1">
+                    {job.tasks.map(task => (
+                      <li key={task}>{task}</li>
+                    ))}
+                  </ul>
                 </div>
-                <div className="w-full md:w-1/4 mt-4 md:mt-0 flex justify-center items-center">
-                  <div className={`h-24 w-24 rounded-lg border ${borderClass} flex items-center justify-center overflow-hidden`}>
-                    <img src={job.logo} alt="Company Logo" className="object-cover" />
-                  </div>
-                </div>
+                <motion.div
+                  whileHover={{ rotate: 5, scale: 1.05 }}
+                  className={`h-24 w-24 rounded-lg border ${borderClass} flex items-center justify-center overflow-hidden shadow-sm`}
+                >
+                  <img src={job.logo} alt="Company Logo" className="object-cover w-full h-full" />
+                </motion.div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </motion.div>
