@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { easeOut, motion, Variants } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { Project } from '@/lib/ProjectsData';
 
@@ -11,14 +11,14 @@ interface ProjectsSectionProps {
   projectsInView: boolean;
 }
 
-const ProjectsSection: React.FC<ProjectsSectionProps> = ({ 
-  darkMode, 
-  projectsInView 
+const ProjectsSection: React.FC<ProjectsSectionProps> = ({
+  darkMode,
+  projectsInView
 }) => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
-  
+
   // Load projects from ProjectsData service
   useEffect(() => {
     const loadProjects = async () => {
@@ -43,15 +43,15 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
 
   const secondaryTextClass = darkMode ? 'text-gray-400' : 'text-gray-600';
   const borderClass = darkMode ? 'border-gray-800' : 'border-gray-200';
-  
+
   // Animation variants
-  const fadeInUp = {
+  const fadeInUp: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: [0.12, 0, 0.39, 0] }
-    }
+      transition: { duration: 0.5, ease: easeOut },
+    },
   };
 
   if (isLoading) {
@@ -65,12 +65,12 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
   }
 
   return (
-    <section 
-      id="projects" 
+    <section
+      id="projects"
       className={`py-20 px-4 border-t border-b ${borderClass}`}
     >
       <div className="container mx-auto">
-        <motion.div 
+        <motion.div
           variants={fadeInUp}
           initial="hidden"
           animate={projectsInView ? "visible" : "hidden"}
@@ -81,13 +81,13 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
             A showcase of my recent work, designs, and creative explorations.
           </p>
         </motion.div>
-        
+
         {/* Projects grid - preserving the original design */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-20">
           {/* First Project - School of Architecture */}
           {projects[0] && (
-            <div 
-              className="relative mb-12 group cursor-pointer" 
+            <div
+              className="relative mb-12 group cursor-pointer"
               onClick={() => handleProjectClick(projects[0].id)}
             >
               {/* Images group with collapse-expand hover behavior */}
@@ -98,55 +98,55 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                     {projects[0].category}
                   </span>
                 </div>
-                
+
                 {/* Main image */}
-                <motion.div 
+                <motion.div
                   className="absolute top-7 left-4 w-64 rounded-lg overflow-hidden shadow-md z-10
                             group-hover:left-0 group-hover:-translate-y-2 transition-all duration-300"
                 >
-                  <img 
-                    src={projects[0].image || "/api/placeholder/400/320"} 
+                  <img
+                    src={projects[0].image || "/api/placeholder/400/320"}
                     alt={projects[0].title}
                     className="w-full h-full object-cover"
                   />
                 </motion.div>
-                
+
                 {/* Additional image 1 */}
                 {projects[0].additionalImages?.length > 0 && (
-                  <motion.div 
+                  <motion.div
                     className="absolute top-16 right-8 w-44 h-32 rounded-lg overflow-hidden shadow-md z-20
                               group-hover:right-0 group-hover:-translate-y-2 transition-all duration-300"
                   >
-                    <img 
-                      src={projects[0].additionalImages[0] || "/api/placeholder/400/320"} 
+                    <img
+                      src={projects[0].additionalImages[0] || "/api/placeholder/400/320"}
                       alt={`${projects[0].title} additional view`}
                       className="w-full h-full object-cover"
                     />
                   </motion.div>
                 )}
-                
+
                 {/* Additional image 2 */}
                 {projects[0].additionalImages?.length > 1 && (
-                  <motion.div 
+                  <motion.div
                     className="absolute top-40 left-16 w-36 h-28 rounded-lg overflow-hidden shadow-md z-20
                               group-hover:left-10 group-hover:translate-y-1 transition-all duration-300"
                   >
-                    <img 
-                      src={projects[0].additionalImages[1] || "/api/placeholder/400/320"} 
+                    <img
+                      src={projects[0].additionalImages[1] || "/api/placeholder/400/320"}
                       alt={`${projects[0].title} third view`}
                       className="w-full h-full object-cover"
                     />
                   </motion.div>
                 )}
               </div>
-              
+
               {/* Project details */}
               <div>
                 <h3 className="text-xl font-bold text-indigo-500 mb-2">{projects[0].title}</h3>
                 <p className={`${secondaryTextClass} mb-3 text-sm`}>
                   {projects[0].description}
                 </p>
-                
+
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2 mb-4">
                   {projects[0].tags.slice(0, 3).map(tag => (
@@ -155,7 +155,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                     </span>
                   ))}
                 </div>
-                
+
                 {/* View project link */}
                 <motion.div
                   className="inline-flex items-center text-sm font-medium text-indigo-500 hover:text-indigo-600 transition-colors"
@@ -170,11 +170,11 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
               </div>
             </div>
           )}
-          
+
           {/* Second Project - Pavilion Website */}
           {projects[1] && (
-            <div 
-              className="relative mb-12 group cursor-pointer" 
+            <div
+              className="relative mb-12 group cursor-pointer"
               onClick={() => handleProjectClick(projects[1].id)}
             >
               <div className="relative h-64 mb-6">
@@ -184,55 +184,55 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                     {projects[1].category}
                   </span>
                 </div>
-                
+
                 {/* Main image (larger, centered) */}
-                <motion.div 
+                <motion.div
                   className="absolute top-5 right-4 w-72 h-48 rounded-lg overflow-hidden shadow-md z-20
                             group-hover:right-0 group-hover:-translate-y-2 transition-all duration-300"
                 >
-                  <img 
-                    src={projects[1].image || "/api/placeholder/400/320"} 
+                  <img
+                    src={projects[1].image || "/api/placeholder/400/320"}
                     alt={projects[1].title}
                     className="w-full h-full object-cover"
                   />
                 </motion.div>
-                
+
                 {/* Additional image 1 */}
                 {projects[1].additionalImages?.length > 0 && (
-                  <motion.div 
+                  <motion.div
                     className="absolute top-28 left-4 w-32 h-32 rounded-lg overflow-hidden shadow-md z-10
                               group-hover:left-0 group-hover:translate-y-1 transition-all duration-300"
                   >
-                    <img 
-                      src={projects[1].additionalImages[0] || "/Pilos.jpg"} 
+                    <img
+                      src={projects[1].additionalImages[0] || "/Pilos.jpg"}
                       alt={`${projects[1].title} additional view`}
                       className="w-full h-full object-cover"
                     />
                   </motion.div>
                 )}
-                
+
                 {/* Additional image 2 */}
                 {projects[1].additionalImages?.length > 1 && (
-                  <motion.div 
+                  <motion.div
                     className="absolute bottom-0 right-16 w-44 h-32 rounded-lg overflow-hidden shadow-md z-10
                               group-hover:right-10 group-hover:translate-y-2 transition-all duration-300"
                   >
-                    <img 
-                      src={projects[1].additionalImages[1] || "/Hotel.png"} 
+                    <img
+                      src={projects[1].additionalImages[1] || "/Hotel.png"}
                       alt={`${projects[1].title} third view`}
                       className="w-full h-full object-cover"
                     />
                   </motion.div>
                 )}
               </div>
-              
+
               {/* Project details */}
               <div>
                 <h3 className="text-xl font-bold text-indigo-500 mb-2">{projects[1].title}</h3>
                 <p className={`${secondaryTextClass} mb-3 text-sm`}>
                   {projects[1].description}
                 </p>
-                
+
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2 mb-4">
                   {projects[1].tags.slice(0, 3).map(tag => (
@@ -241,7 +241,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                     </span>
                   ))}
                 </div>
-                
+
                 {/* View project link */}
                 <motion.div
                   className="inline-flex items-center text-sm font-medium text-indigo-500 hover:text-indigo-600 transition-colors"
@@ -256,11 +256,11 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
               </div>
             </div>
           )}
-          
+
           {/* Third Project - Times to Listen */}
           {projects[2] && (
-            <div 
-              className="relative mb-12 group cursor-pointer" 
+            <div
+              className="relative mb-12 group cursor-pointer"
               onClick={() => handleProjectClick(projects[2].id)}
             >
               <div className="relative h-64 mb-6">
@@ -270,55 +270,55 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                     {projects[2].category}
                   </span>
                 </div>
-                
+
                 {/* Main image */}
-                <motion.div 
+                <motion.div
                   className="absolute top-7 right-4 w-64 rounded-lg overflow-hidden shadow-md z-10
                             group-hover:right-0 group-hover:-translate-y-2 transition-all duration-300"
                 >
-                  <img 
-                    src={projects[2].image || "/api/placeholder/400/320"} 
+                  <img
+                    src={projects[2].image || "/api/placeholder/400/320"}
                     alt={projects[2].title}
                     className="w-full h-full object-cover"
                   />
                 </motion.div>
-                
+
                 {/* Additional image 1 */}
                 {projects[2].additionalImages?.length > 0 && (
-                  <motion.div 
+                  <motion.div
                     className="absolute top-20 left-2 w-40 h-36 rounded-lg overflow-hidden shadow-md z-20
                                group-hover:left-0 group-hover:-translate-y-2 transition-all duration-300"
                   >
-                    <img 
-                      src={projects[2].additionalImages[0] || "/api/placeholder/400/320"} 
+                    <img
+                      src={projects[2].additionalImages[0] || "/api/placeholder/400/320"}
                       alt={`${projects[2].title} additional view`}
                       className="w-full h-full object-cover"
                     />
                   </motion.div>
                 )}
-                
+
                 {/* Additional image 2 */}
                 {projects[2].additionalImages?.length > 1 && (
-                  <motion.div 
+                  <motion.div
                     className="absolute bottom-0 right-20 w-36 h-28 rounded-lg overflow-hidden shadow-md z-20
                               group-hover:right-16 group-hover:translate-y-2 transition-all duration-300"
                   >
-                    <img 
-                      src={projects[2].additionalImages[1] || "/api/placeholder/400/320"} 
+                    <img
+                      src={projects[2].additionalImages[1] || "/api/placeholder/400/320"}
                       alt={`${projects[2].title} third view`}
                       className="w-full h-full object-cover"
                     />
                   </motion.div>
                 )}
               </div>
-              
+
               {/* Project details */}
               <div>
                 <h3 className="text-xl font-bold text-indigo-500 mb-2">{projects[2].title}</h3>
                 <p className={`${secondaryTextClass} mb-3 text-sm`}>
                   {projects[2].description}
                 </p>
-                
+
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2 mb-4">
                   {projects[2].tags.slice(0, 3).map(tag => (
@@ -327,7 +327,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                     </span>
                   ))}
                 </div>
-                
+
                 {/* View project link */}
                 <motion.div
                   className="inline-flex items-center text-sm font-medium text-indigo-500 hover:text-indigo-600 transition-colors"
@@ -342,7 +342,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
               </div>
             </div>
           )}
-          
+
           {/* Remaining projects with dynamic creation and custom layouts */}
           {projects.slice(3).map((project, index) => {
             // Use a different layout for each remaining project
@@ -366,12 +366,12 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                 addImage2: "bottom-0 left-4 w-36 h-30 group-hover:left-0 group-hover:translate-y-2"
               }
             ];
-            
+
             const style = layoutStyles[index % layoutStyles.length];
-            
+
             return (
-              <div 
-                key={project.id} 
+              <div
+                key={project.id}
                 className="relative mb-12 group cursor-pointer"
                 onClick={() => handleProjectClick(project.id)}
               >
@@ -382,52 +382,52 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                       {project.category}
                     </span>
                   </div>
-                  
+
                   {/* Main image */}
-                  <motion.div 
+                  <motion.div
                     className={`absolute ${style.mainImage} rounded-lg overflow-hidden shadow-md z-10 transition-all duration-300`}
                   >
-                    <img 
-                      src={project.image} 
+                    <img
+                      src={project.image}
                       alt={project.title}
                       className="w-full h-full object-cover"
                     />
                   </motion.div>
-                  
+
                   {/* Additional image 1 */}
                   {project.additionalImages?.length > 0 && (
-                    <motion.div 
+                    <motion.div
                       className={`absolute ${style.addImage1} rounded-lg overflow-hidden shadow-md z-20 transition-all duration-300`}
                     >
-                      <img 
-                        src={project.additionalImages[0]} 
+                      <img
+                        src={project.additionalImages[0]}
                         alt={`${project.title} additional view`}
                         className="w-full h-full object-cover"
                       />
                     </motion.div>
                   )}
-                  
+
                   {/* Additional image 2 */}
                   {project.additionalImages?.length > 1 && (
-                    <motion.div 
+                    <motion.div
                       className={`absolute ${style.addImage2} rounded-lg overflow-hidden shadow-md z-20 transition-all duration-300`}
                     >
-                      <img 
-                        src={project.additionalImages[1]} 
+                      <img
+                        src={project.additionalImages[1]}
                         alt={`${project.title} third view`}
                         className="w-full h-full object-cover"
                       />
                     </motion.div>
                   )}
                 </div>
-                
+
                 {/* Project details */}
                 <div>
                   <h3 className="text-xl font-bold text-indigo-500 mb-2">{project.title}</h3>
                   <p className={`${secondaryTextClass} mb-3 text-sm`}>
                     {project.description}
                   </p>
-                  
+
                   {/* Tags */}
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.tags.slice(0, 3).map(tag => (
@@ -436,7 +436,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                       </span>
                     ))}
                   </div>
-                  
+
                   {/* View project link */}
                   <motion.div
                     className="inline-flex items-center text-sm font-medium text-indigo-500 hover:text-indigo-600 transition-colors"

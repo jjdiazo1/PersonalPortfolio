@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useInView } from 'react-intersection-observer';
 import ProjectsSection from './ProjectsSection';
+import ProfileSection from './sections/ProfileSection';
 
 export default function ModernPortfolio() {
   // IMPORTANTE: Mantener TODOS los hooks al principio, sin condiciones entre ellos
@@ -275,38 +276,7 @@ export default function ModernPortfolio() {
         </div>
 
         {/* PROFILE SECTION */}
-        <section
-          ref={profileRef}
-          id="profile"
-          className={`py-20 px-4 border-b ${borderClass}`}
-        >
-            <motion.div
-            variants={fadeInUp}
-            initial="hidden"
-            animate={profileInView ? "visible" : "hidden"}
-            className={`max-w-3xl mx-auto flex flex-col items-center text-center space-y-6`}
-            >
-            <h2 className="text-4xl font-bold mb-4">Profile</h2>
-            <div className={`border ${borderClass} p-8 rounded-lg`}>
-              <div className="relative w-32 h-32 mx-auto mb-6 group">
-                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 opacity-0 transition-opacity group-hover:opacity-20"></div>
-                <img
-                  src="/Profile.jpg"
-                  alt="Profile"
-                  className={`rounded-full h-full w-full object-cover border-4 ${borderClass} relative z-10`}
-                />
-              </div>
-              <p className="text-lg mb-4">
-              I am a dedicated, hardworking software engineering and computer science student at
-              Universidad de Los Andes, with a calm and collaborative mindset.
-              </p>
-              <p className={`${secondaryTextClass}`}>
-              I continuously seek to improve my technical expertise, leverage innovative solutions, 
-              and enhance teamwork to deliver exceptional results.
-              </p>
-            </div>
-            </motion.div>
-        </section>
+        <ProfileSection darkMode={darkMode} />
 
         {/* SKILLS SECTION */}
         <section
@@ -315,7 +285,6 @@ export default function ModernPortfolio() {
           className={`py-20 px-4 border-b ${borderClass}`}
         >
           <motion.div
-            variants={fadeInUp}
             initial="hidden"
             animate={skillsInView ? "visible" : "hidden"}
             className="max-w-3xl mx-auto"
@@ -352,7 +321,6 @@ export default function ModernPortfolio() {
           className={`py-20 px-4 border-b ${borderClass}`}
         >
           <motion.div
-            variants={fadeInUp}
             initial="hidden"
             animate={languagesInView ? "visible" : "hidden"}
             className="max-w-3xl mx-auto"
@@ -384,7 +352,6 @@ export default function ModernPortfolio() {
           className={`py-20 px-4 border-b ${borderClass}`}
         >
           <motion.div
-            variants={fadeInUp}
             initial="hidden"
             animate={educationInView ? "visible" : "hidden"}
             className="max-w-3xl mx-auto"
@@ -412,7 +379,6 @@ export default function ModernPortfolio() {
           className={`py-20 px-4 border-b ${borderClass}`}
         >
           <motion.div
-            variants={fadeInUp}
             initial="hidden"
             animate={experienceInView ? "visible" : "hidden"}
             className="max-w-3xl mx-auto"
