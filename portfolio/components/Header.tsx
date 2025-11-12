@@ -30,7 +30,7 @@ export default function Header({ darkMode, setDarkMode, activeSection, scrollToS
       <div className={`${darkMode ? 'bg-black' : 'bg-white'} border-b ${borderClass} transition-colors duration-300`}>
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
-            <Link href="/" className="text-xl font-bold">Juanjo Diaz</Link>
+            <Link href="/" className="text-xl font-bold">JJD</Link>
           </motion.div>
           <motion.nav initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="hidden md:flex space-x-6">
             {navLinks.map(link => (

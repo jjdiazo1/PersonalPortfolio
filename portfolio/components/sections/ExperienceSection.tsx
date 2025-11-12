@@ -45,7 +45,7 @@ export default function ExperienceSection({ darkMode }: ExperienceSectionProps) 
       "Integrated database solutions and optimized site performance.",
       "Contributed to improving the hotel's digital experience for clients."
     ],
-    logo: "/Logos/Hotel.png"
+    logo: "/Logos/hotel.png"
   },
   {
     title: "Graphic Designer",
