@@ -16,7 +16,7 @@ export default function SkillsCarousel({ darkMode }: SkillsCarouselProps) {
 
   useEffect(() => {
     // Fetch skills from JSON
-    fetch('/skills.json')
+    fetch('/Data/skills.json')
       .then(res => {
         if (!res.ok) throw new Error('Network response was not ok');
         return res.json();

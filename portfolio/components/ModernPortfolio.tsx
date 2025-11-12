@@ -11,7 +11,6 @@ import EducationSection from './sections/EducationSection';
 import ExperienceSection from './sections/ExperienceSection';
 import ContactSection from './sections/ContactSection';
 import ProjectsSection from './ProjectsSection';
-import SkillsCarousel from './sections/SkillCarousel';
 
 export default function ModernPortfolio() {
   const [darkMode, setDarkMode] = useState(false);
@@ -41,7 +40,6 @@ export default function ModernPortfolio() {
       <Header darkMode={darkMode} setDarkMode={setDarkMode} activeSection={activeSection} scrollToSection={scrollToSection} />
       <main>
         <HomeSection darkMode={darkMode} scrollToSection={scrollToSection} />
-        <SkillsCarousel darkMode={darkMode} />
         <ProjectsSection darkMode={darkMode} projectsInView={projectsInView} />
         <EducationSection darkMode={darkMode} />
         <ExperienceSection darkMode={darkMode} />

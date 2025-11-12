@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
+import SkillsCarousel from './SkillCarousel';
 
 interface HomeSectionProps {
   darkMode: boolean;
@@ -38,9 +39,7 @@ export default function HomeSection({ darkMode, scrollToSection }: HomeSectionPr
 
   return (
     <>
-      {/* Loading Screen */}
-     
-      <section ref={sectionRef} id="home" className="relative min-h-screen flex items-center justify-center px-4 py-20 overflow-hidden">
+      <section ref={sectionRef} id="home" className="relative min-h-screen flex flex-col px-4 py-20 overflow-hidden">
         {/* Animated gradient background */}
         <div className="absolute inset-0 -z-10">
           <div className={`absolute inset-0 ${darkMode ? 'bg-gradient-to-br from-gray-900 via-indigo-950 to-gray-900' : 'bg-gradient-to-br from-gray-50 via-indigo-50 to-purple-50'}`} />
@@ -77,8 +76,9 @@ export default function HomeSection({ darkMode, scrollToSection }: HomeSectionPr
           backgroundSize: '40px 40px'
         }} />
 
-        <motion.div style={{ y, opacity }} className="container mx-auto relative z-10">
-          <div className="flex flex-col-reverse md:flex-row md:items-center gap-12">
+        {/* Main Content - Flex grow to push carousel to bottom */}
+        <motion.div style={{ y, opacity }} className="container mx-auto relative z-10 flex-grow flex items-center">
+          <div className="w-full flex flex-col-reverse md:flex-row md:items-center gap-12">
             {/* Content */}
             <div className="md:w-1/2 space-y-8">
               {/* Main heading with gradient text */}
@@ -143,8 +143,8 @@ export default function HomeSection({ darkMode, scrollToSection }: HomeSectionPr
                 className={`flex gap-8 pt-8 border-t ${darkMode ? 'border-gray-800' : 'border-gray-200'}`}
               >
                 {[
-                  { label: 'Projects', value: '50+' },
-                  { label: 'Experience', value: '5+' },
+                  { label: 'Projects', value: '10+' },
+                  { label: 'Languages', value: '4' },
                   { label: 'Technologies', value: '20+' }
                 ].map((stat, i) => (
                   <div key={i} className="space-y-1">
@@ -200,6 +200,17 @@ export default function HomeSection({ darkMode, scrollToSection }: HomeSectionPr
             </motion.div>
           </div>
         </motion.div>
+
+        {/* Skills Carousel - Sticky at bottom, hidden on mobile */}
+        <div className="hidden md:block relative z-20 mt-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1 }}
+          >
+            <SkillsCarousel darkMode={darkMode} />
+          </motion.div>
+        </div>
 
         <style jsx>{`
           @keyframes blob {
