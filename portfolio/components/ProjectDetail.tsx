@@ -111,11 +111,11 @@ export default function ProjectDetail({ id: propId }: { id?: string | string[] }
             <div className="lg:w-2/3">
               <div className="mb-10">
                 <h2 className="text-2xl font-bold mb-4">Project Overview</h2>
-                <div className={`prose ${textClass} max-w-none`}>
-                  <p className="text-lg leading-relaxed mb-6">
-                    {project.fullDescription || project.description}
-                  </p>
-                </div>
+              <div className={`prose ${textClass} max-w-none`}>
+                <p className="text-lg leading-relaxed mb-6 whitespace-pre-line">
+                  {project.fullDescription || project.description}
+                </p>
+              </div>
               </div>
               
               {/* Project gallery */}
