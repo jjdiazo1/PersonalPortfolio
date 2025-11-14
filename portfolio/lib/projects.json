@@ -93,19 +93,18 @@
       },
       {
         "id": 6,
-        "title": "Pawsitivity DogSpa",
-        "category": "Web Application / UX Design",
-        "description": "A full-stack pet spa platform with booking, packages, and playful visuals.",
-        "fullDescription": "Pawsitivity DogSpa is a web application designed to bring joy and convenience to pet owners by offering a seamless digital experience for booking spa services, exploring service packages, filtering locations, and browsing pet products. The platform features real-time package filtering by branch, interactive reservation management, and dynamic service previews with random dog images using DogAPI. Built with a user-centered design, the project emphasizes clarity, accessibility, and a touch of fun through canine-themed elements.",
+        "title": "Traffic Analysis",
+        "category": "Data Science / Computer Vision / Urban Mobility",
+        "description": "Real-time traffic monitoring along Bogotá’s Carrera 7 using computer vision to extract congestion levels from map imagery and validate with routing metrics.",
+        "fullDescription": "This project analyzes real-time traffic on *Carrera 7* in Bogotá by combining computer vision with geodata and Python automation. The goal was to pull the traffic layer from Google Maps, extract congestion levels visually (instead of paying for the Traffic API), and compare those results with precise routing estimates like speed, distance, and travel times. \n \n The pipeline works by grabbing the traffic map for each segment, using computer vision to read the congestion colors, running optional routing queries for validation, and then visualizing everything through interactive maps and charts. \n \n The biggest challenge was making a CV system that could reliably read the traffic level from color patterns while keeping segment-by-segment consistency. And beyond the technical work, there was also the economic challenge: getting live traffic data from Google’s API is extremely expensive if you query it continuously...  So the goal was to build a system that didn’t rely on expensive API calls, could run automatically every hour or every few minutes, and still gave high-quality traffic estimations. \n \n The solution? \n I developed a Python pipeline that processes each segment of Carrera 7 and extracts its traffic level visually, directly from the traffic map. This avoids the need to call Google’s paid Traffic API, which charges per request. And even though the system wasn’t ultimately deployed, the solution I delivered was fully functional and ready to run in the cloud. Here’s the key point though, to monitor the 10 segments **every minute**, the Google Traffic Advanced API would require: 10 segments × 1,440 calls per day × 31 days = 446,400 API calls per month. Google charges about $10 per 1,000 calls, so this would cost: $4,464/month. But my approach didn’t make those paid traffic requests. It simply loaded the traffic layer visually, which is: \n * basically free with Google’s $200/month credit \n * or only a few cents if you exceed it \n * and easy to cache \n So instead of paying €4,000 a month, the system would run for almost nothing. \n \nThe approach showed that it’s possible to monitor a major urban corridor in real time **without paying thousands of euros in API costs**, thanks to a computer-vision workaround. This way, even small cities can afford to monitor and learn more from data on their most crowded highways.",
         "tags": ["Website", "Angular", "Spring", "Pet Services", "UX/UI", "DogAPI"],
-       "image": "/Project 5/1.png",
-        "fullImage": "/Project 5/6.png",
-        "additionalImages": ["/Project 5/2.png", "/Project 5/3.png", "/Project 5/3.jpg", "/Project 5/5.jpg"],
-        "client": "Academic Project – Universidad de Los Andes",
+        "image": "/Project 7/1.png",
+        "fullImage": "/Project 7/6.png",
+        "additionalImages": ["/Project 7/2.png", "/Project 7/3.png", "/Project 7/3.jpg", "/Project 7/5.jpg"],
+        "client": "Academic / Research Project – Universidad de Los Andes",
         "year": "2025",
         "timeline": "2 months",
-        "role": "Frontend Developer & UX Designer",
-        "liveUrl": "https://dogspa.vercel.app"
+        "role": "Python Developer & Data Analyst"
       }
     ]
   }

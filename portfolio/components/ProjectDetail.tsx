@@ -195,7 +195,7 @@ export default function ProjectDetail({ id: propId }: { id?: string | string[] }
                         rel="noopener noreferrer" 
                         className={`block w-full py-3 text-center ${accentClass} text-white rounded-md transition-transform hover:scale-105`}
                       >
-                        View Live Project
+                        View Project
                       </a>
                     </div>
                   )}
