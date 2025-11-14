@@ -115,26 +115,6 @@ export default function ProjectDetail({ id: propId }: { id?: string | string[] }
                   <p className="text-lg leading-relaxed mb-6">
                     {project.fullDescription || project.description}
                   </p>
-                  
-                  {/* Contenido adicional del proyecto - puedes agregar más secciones según necesites */}
-                  <h3 className="text-xl font-bold mt-8 mb-4">Challenge</h3>
-                  <p className="mb-6">
-                    The primary challenge was to create a solution that would effectively meet the needs of the client
-                    while maintaining high standards of usability, accessibility, and visual appeal.
-                  </p>
-                  
-                  <h3 className="text-xl font-bold mt-8 mb-4">Solution</h3>
-                  <p className="mb-6">
-                    We developed a comprehensive approach that combined cutting-edge technology with thoughtful
-                    design to create a seamless and engaging user experience that fulfilled all project requirements.
-                  </p>
-                  
-                  <h3 className="text-xl font-bold mt-8 mb-4">Results</h3>
-                  <p>
-                    The final product exceeded client expectations, resulting in improved engagement metrics
-                    and positive feedback from users. The project demonstrates our ability to deliver
-                    high-quality solutions that combine technical excellence with compelling design.
-                  </p>
                 </div>
               </div>
               
