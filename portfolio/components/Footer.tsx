@@ -2,7 +2,7 @@
 
 export default function Footer() {
   return (
-    <footer className="border-t border-charcoal">
+    <footer className="mt-auto">
       <div className="px-5 md:px-12 py-5 flex items-center justify-between">
         <span className="font-condensed text-[13px] font-medium uppercase tracking-[0.12em] text-charcoal">
           JJD

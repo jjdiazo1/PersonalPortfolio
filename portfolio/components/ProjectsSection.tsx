@@ -33,11 +33,18 @@ export default function ProjectsSection() {
         </div>
       )}
 
-      {/* Rest — 2 columns on desktop, separated by a vertical line */}
+      {/* Rest — 2 columns on desktop.
+          IMPORTANT: do NOT use divide-x on a multi-row grid — it adds border-left
+          to every non-first child, including left-column items in rows 2+, which
+          doubles the outer frame's border-l. Instead, add border-l only to
+          right-column items (odd index in 0-based). */}
       {rest.length > 0 && (
-        <div className="border-t border-charcoal md:grid md:grid-cols-2 md:divide-x md:divide-charcoal">
+        <div className="border-t border-charcoal md:grid md:grid-cols-2">
           {rest.map((project, i) => (
-            <div key={project.id} className="px-5 md:px-12">
+            <div
+              key={project.id}
+              className={`px-5 md:px-12${i % 2 === 1 ? ' md:border-l md:border-charcoal' : ''}`}
+            >
               <ProjectCard project={project} index={i + 1} />
             </div>
           ))}

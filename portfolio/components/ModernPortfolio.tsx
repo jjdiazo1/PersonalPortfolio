@@ -2,7 +2,6 @@
 
 import Header from './Header';
 import Footer from './Footer';
-import GridlineOverlay from './GridlineOverlay';
 import HeroSection from './sections/HeroSection';
 import ProjectsSection from './ProjectsSection';
 import AboutSection from './sections/AboutSection';
@@ -10,19 +9,11 @@ import EducationSection from './sections/EducationSection';
 
 export default function Portfolio() {
   return (
-    <div className="bg-paper text-charcoal min-h-screen relative">
-      {/* Persistent vertical gridlines behind everything */}
-      <GridlineOverlay />
-
+    <div className="bg-paper text-charcoal min-h-screen">
       <Header />
-
-      {/*
-        Outer frame: a single centered column bounded by hairline borders
-        on both sides — this is the "editorial grid frame" that ties all
-        sections together visually.
-      */}
-      <div className="relative z-10 max-w-page mx-auto border-l border-r border-charcoal min-h-screen">
-        <main className="pt-12 md:pt-14">
+      {/* Outer editorial frame: hairline borders on both sides, full height */}
+      <div className="max-w-page mx-auto border-l border-r border-b border-charcoal min-h-screen flex flex-col">
+        <main className="pt-12 md:pt-14 flex-1">
           <HeroSection />
           <ProjectsSection />
           <AboutSection />

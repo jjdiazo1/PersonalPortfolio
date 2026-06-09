@@ -87,12 +87,10 @@ export default function HeroSection() {
           </button>
         </div>
 
-        {/* Right: profile photo — visible on both mobile (above fold strip) and desktop */}
-        <div className="relative overflow-hidden border-t border-charcoal md:border-t-0"
-             style={{ height: '220px', minHeight: 0 }}
-             // Mobile: fixed height; Desktop: full column height via aspect
-        >
-          <div className="md:hidden absolute inset-0">
+        {/* Right: profile photo */}
+        <div className="relative border-t border-charcoal md:border-t-0">
+          {/* Mobile: fixed-height strip */}
+          <div className="md:hidden h-[220px] overflow-hidden">
             <img
               src="/profile.png"
               alt="Juan Jose Diaz"
@@ -103,7 +101,8 @@ export default function HeroSection() {
               }}
             />
           </div>
-          <div className="hidden md:block h-full" style={{ minHeight: '320px' }}>
+          {/* Desktop: absolute fill — stretches to match the left column's height */}
+          <div className="hidden md:block absolute inset-0 overflow-hidden">
             <img
               src="/profile.png"
               alt="Juan Jose Diaz"
