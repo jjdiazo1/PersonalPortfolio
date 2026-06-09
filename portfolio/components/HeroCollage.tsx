@@ -108,7 +108,7 @@ export default function HeroCollage() {
   return (
     <div className="border-t border-charcoal">
       {/* Desktop: all projects side by side */}
-      <div className="hidden md:flex divide-x-0">
+      <div className="hidden md:flex divide-x divide-charcoal">
         {projects.map((p, i) => (
           <GlitchTile
             key={p.id}
