@@ -27,7 +27,7 @@ function GlitchTile({
     >
       {/* Base image — scale + desaturate on hover */}
       <motion.img
-        src={project.image}
+        src={project.heroImage}
         alt={project.title}
         className="w-full h-full object-cover select-none"
         animate={{
@@ -42,7 +42,7 @@ function GlitchTile({
       {/* Glitch ghost layer — second copy sliced with clip-path animation */}
       {hovered && (
         <img
-          src={project.image}
+          src={project.heroImage}
           alt=""
           aria-hidden
           className="absolute inset-0 w-full h-full object-cover glitch-layer pointer-events-none"

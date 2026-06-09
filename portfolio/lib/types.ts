@@ -5,6 +5,7 @@ export interface Project {
     description: string;
     tags: string[];
     image: string;
+    heroImage: string;
     fullImage: string;
     additionalImages: string[];
     client?: string;
