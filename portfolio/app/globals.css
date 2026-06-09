@@ -28,12 +28,11 @@ body {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--charcoal); }
 
-/* Cursor blink */
+/* ─── Cursor blink ─── */
 @keyframes cursor-blink {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+  50%       { opacity: 0; }
 }
-
 .cursor-blink {
   animation: cursor-blink 530ms step-end infinite;
   font-family: var(--font-jetbrains), ui-monospace, monospace;
@@ -42,45 +41,47 @@ body {
   margin-left: 2px;
 }
 
-/* Ticker animation */
+/* ─── Ticker — seamless infinite scroll ─── */
+/*
+  The ticker works by placing two identical copies of the content
+  side-by-side inside a flex row. The animation translates the row
+  from 0 → -50% (exactly one copy width), then snaps back invisibly
+  because the second copy is pixel-identical to the first.
+  No padding on the spans themselves — spacing lives in the content string.
+*/
 @keyframes ticker-scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
-.ticker-track {
+.ticker-viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+.ticker-inner {
   display: flex;
+  flex-wrap: nowrap;
   width: max-content;
-  animation: ticker-scroll 20s linear infinite;
+  animation: ticker-scroll 28s linear infinite;
+  will-change: transform;
 }
 
-.ticker-track:hover,
-.ticker-track.paused {
+.ticker-inner.paused {
   animation-play-state: paused;
 }
 
-/* Gridline draw animation */
+/* ─── Gridline draw ─── */
 @keyframes gridline-draw {
   from { transform: scaleY(0); }
-  to { transform: scaleY(1); }
+  to   { transform: scaleY(1); }
 }
-
 .gridline-animate {
   transform-origin: top;
   animation: gridline-draw 400ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Image clip reveal */
-@keyframes clip-reveal {
-  from { clip-path: inset(0 0 100% 0); }
-  to { clip-path: inset(0 0 0% 0); }
-}
-
-.clip-reveal {
-  animation: clip-reveal 500ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Hero text reveal */
+/* ─── Hero text clip reveal ─── */
 @keyframes hero-reveal {
   from {
     clip-path: inset(100% 0 0 0);
@@ -91,7 +92,32 @@ body {
     transform: translateY(0px);
   }
 }
-
 .hero-reveal {
   animation: hero-reveal 400ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ─── Collage glitch helpers ─── */
+@keyframes glitch-slice {
+  0%  { clip-path: inset(0 0 100% 0); transform: translateX(0);   opacity: 0; }
+  15% { clip-path: inset(15% 0 60% 0); transform: translateX(-4px); opacity: 0.85; }
+  30% { clip-path: inset(55% 0 20% 0); transform: translateX(4px);  opacity: 0.7; }
+  45% { clip-path: inset(80% 0 5%  0); transform: translateX(-2px); opacity: 0.9; }
+  60% { clip-path: inset(30% 0 45% 0); transform: translateX(3px);  opacity: 0.6; }
+  80% { clip-path: inset(0 0 100% 0); transform: translateX(0);   opacity: 0; }
+  100%{ clip-path: inset(0 0 100% 0); transform: translateX(0);   opacity: 0; }
+}
+.glitch-layer {
+  animation: glitch-slice 0.55s steps(1) infinite;
+}
+
+@keyframes glitch-jitter {
+  0%   { transform: translateX(0); }
+  20%  { transform: translateX(-3px); }
+  40%  { transform: translateX(3px); }
+  60%  { transform: translateX(-2px); }
+  80%  { transform: translateX(2px); }
+  100% { transform: translateX(0); }
+}
+.glitch-jitter {
+  animation: glitch-jitter 0.3s steps(1) infinite;
 }
