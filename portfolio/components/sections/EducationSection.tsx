@@ -1,69 +1,89 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useInView, type Transition } from 'framer-motion';
 
-interface EducationSectionProps {
-  darkMode: boolean;
-}
+const SCHOOLS = [
+  {
+    name: 'National Institute of Applied Sciences Lyon',
+    short: 'INSA Lyon',
+    degree: 'Master in Computer Science',
+    period: '2025 – 2027',
+    location: 'Lyon, France',
+    logo: '/Logos/insa.png',
+  },
+  {
+    name: 'Universidad de Los Andes',
+    short: 'Uniandes',
+    degree: 'Systems and Computer Science Engineering',
+    period: '2022 – 2026',
+    location: 'Bogotá, Colombia',
+    logo: '/Logos/uniandes.png',
+  },
+  {
+    name: 'National Service of Apprenticeship',
+    short: 'SENA',
+    degree: 'Computer and Systems Technician',
+    period: '2019 – 2021',
+    location: 'Colombia',
+    logo: '/Logos/sena.png',
+  },
+];
 
-export default function EducationSection({ darkMode }: EducationSectionProps) {
-  const borderClass = darkMode ? 'border-gray-800' : 'border-gray-200';
-  const secondaryTextClass = darkMode ? 'text-gray-400' : 'text-gray-600';
-
-  const schools = [
-    {
-      name: "National institut of applied sciences Lyon",
-      degree: "Master in Computer Science",
-      period: "2025 - 2027",
-      logo: "/Logos/insa.png",
-    },
-    {
-      name: "Universidad de Los Andes",
-      degree: "Systems and Computer Science Engineering",
-      period: "2022 - 2026",
-      logo: "/Logos/uniandes.png",
-    },
-    {
-      name: "National service of apprenticeship (SENA)",
-      degree: "Computer and Systems Technician",
-      period: "2019- 2021",
-      logo: "/Logos/sena.png",
-    },
-  ];
+export default function EducationSection() {
+  const ref = useRef<HTMLElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-10%' });
+  const spring: Transition = { type: 'spring', stiffness: 280, damping: 24, mass: 1 };
 
   return (
-    <section id="education" className={`py-20 px-4 border-b ${borderClass}`}>
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="max-w-3xl mx-auto"
-      >
-        <h2 className="text-4xl font-bold text-center mb-12">Education</h2>
-        <div className="space-y-8">
-          {schools.map((school, i) => (
-            <motion.div
-              key={school.name}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.2, duration: 0.6 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.03 }}
-              className={`border ${borderClass} p-8 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col md:flex-row items-center gap-6`}
-            >
-              <div className="h-20 w-20 flex-shrink-0 rounded-lg overflow-hidden border">
-                <img src={school.logo} alt={school.name} className="object-contain w-full h-full" />
-              </div>
-              <div>
-                <h3 className="font-bold text-2xl uppercase mb-2">{school.name}</h3>
-                <p className="text-lg mb-1">{school.degree}</p>
-                <p className={`${secondaryTextClass}`}>{school.period}</p>
-              </div>
-            </motion.div>
-          ))}
+    <section id="education" ref={ref} className="border-b border-charcoal">
+      {/* Section label */}
+      <div className="px-5 md:px-12">
+        <div className="flex items-center justify-between py-3 border-b border-charcoal">
+          <span className="font-condensed text-[11px] font-[500] uppercase tracking-[0.12em] text-charcoal">
+            Education
+          </span>
+          <span className="font-mono text-[11px] text-graphite">03</span>
         </div>
-      </motion.div>
+      </div>
+
+      {/* Rows */}
+      <div className="px-5 md:px-12">
+        {SCHOOLS.map((school, i) => (
+          <motion.div
+            key={school.name}
+            initial={{ opacity: 0, y: 16 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ ...spring, delay: i * 0.07 }}
+            className={`flex items-center gap-5 md:gap-8 py-6${i < SCHOOLS.length - 1 ? ' border-b border-charcoal' : ''}`}
+          >
+            {/* Logo */}
+            <div className="shrink-0 w-10 h-10 md:w-12 md:h-12 overflow-hidden border border-charcoal flex items-center justify-center bg-paper">
+              <img
+                src={school.logo}
+                alt={school.short}
+                className="w-full h-full object-contain p-1"
+              />
+            </div>
+
+            {/* Institution + degree */}
+            <div className="flex-1 min-w-0">
+              <p className="font-editorial font-[300] text-[15px] md:text-[20px] leading-[1.20] tracking-[-0.02em] text-charcoal">
+                {school.name}
+              </p>
+              <p className="font-editorial font-[400] text-[13px] md:text-[15px] leading-[1.50] tracking-[-0.01em] text-graphite mt-0.5">
+                {school.degree}
+              </p>
+            </div>
+
+            {/* Period + location — right */}
+            <div className="shrink-0 text-right hidden sm:block">
+              <p className="font-mono text-[11px] text-charcoal">{school.period}</p>
+              <p className="font-mono text-[11px] text-graphite mt-0.5">{school.location}</p>
+            </div>
+          </motion.div>
+        ))}
+      </div>
     </section>
   );
 }

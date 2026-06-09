@@ -6,13 +6,12 @@ import { motion, useInView, type Transition } from 'framer-motion';
 export default function AboutSection() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: '-15%' });
-
   const spring: Transition = { type: 'spring', stiffness: 280, damping: 24, mass: 1 };
 
   return (
     <section id="about" ref={ref} className="border-b border-charcoal">
       {/* Section label */}
-      <div className="max-w-page mx-auto px-5 md:px-12">
+      <div className="px-5 md:px-12">
         <div className="flex items-center justify-between py-3 border-b border-charcoal">
           <span className="font-condensed text-[11px] font-[500] uppercase tracking-[0.12em] text-charcoal">
             About
@@ -22,7 +21,7 @@ export default function AboutSection() {
       </div>
 
       {/* Content */}
-      <div className="max-w-page mx-auto px-5 md:px-12 py-10 md:py-16">
+      <div className="px-5 md:px-12 py-10 md:py-16">
         <div className="md:grid md:grid-cols-5 md:gap-0 md:divide-x md:divide-charcoal">
           {/* Statement — 60% */}
           <motion.div
@@ -50,7 +49,6 @@ export default function AboutSection() {
               I care about systems that scale and interfaces that feel inevitable. When I&apos;m not shipping, I&apos;m exploring the intersection of product design and distributed systems.
             </p>
 
-            {/* Links */}
             <div className="flex gap-4 mt-2">
               {[
                 { label: '→ GitHub', href: 'https://github.com/jjdiazo1' },

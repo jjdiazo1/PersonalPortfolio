@@ -40,7 +40,7 @@ export default function Header() {
           </span>
 
           <nav className="hidden md:flex gap-6">
-            {['work', 'about'].map((id) => (
+            {['work', 'about', 'education'].map((id) => (
               <button
                 key={id}
                 onClick={() => scrollTo(id)}
@@ -70,7 +70,7 @@ export default function Header() {
             transition={{ type: 'spring', stiffness: 160, damping: 30, mass: 1.2 }}
             className="fixed inset-x-0 bottom-0 z-50 bg-paper border-t border-charcoal"
           >
-            {['work', 'about'].map((id, i) => (
+            {['work', 'about', 'education'].map((id, i) => (
               <button
                 key={id}
                 onClick={() => scrollTo(id)}
