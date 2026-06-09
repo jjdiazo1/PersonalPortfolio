@@ -30,7 +30,7 @@ export default function Header() {
         transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
         className="fixed top-0 left-0 right-0 z-50 bg-paper border-b border-charcoal"
       >
-        <div className="max-w-page mx-auto px-5 md:px-12 h-12 md:h-14 flex items-center justify-between">
+        <div className="px-5 md:px-12 h-12 md:h-14 flex items-center justify-between">
           <span className="font-condensed text-[13px] font-medium uppercase tracking-[0.12em] text-charcoal">
             JJD
           </span>

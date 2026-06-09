@@ -12,7 +12,7 @@ export default function Portfolio() {
     <div className="bg-paper text-charcoal min-h-screen">
       <Header />
       {/* Outer editorial frame: hairline borders on both sides, full height */}
-      <div className="max-w-page mx-auto border-l border-r border-b border-charcoal min-h-screen flex flex-col">
+      <div className="border-b border-charcoal min-h-screen flex flex-col">
         <main className="pt-12 md:pt-14 flex-1">
           <HeroSection />
           <ProjectsSection />
