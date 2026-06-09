@@ -92,7 +92,7 @@ export default function HeroSection() {
           {/* Mobile: fixed-height strip */}
           <div className="md:hidden h-[220px] overflow-hidden">
             <img
-              src="/profile.png"
+              src="/Profile.png"
               alt="Juan Jose Diaz"
               className="w-full h-full object-cover object-[center_15%]"
               style={{
@@ -104,7 +104,7 @@ export default function HeroSection() {
           {/* Desktop: absolute fill — stretches to match the left column's height */}
           <div className="hidden md:block absolute inset-0 overflow-hidden">
             <img
-              src="/profile.png"
+              src="/Profile.png"
               alt="Juan Jose Diaz"
               className="w-full h-full object-cover object-[center_15%]"
               style={{
