@@ -1,30 +1,16 @@
 'use client';
 
-import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
-import { useParams } from 'next/navigation';
-
-// Importamos el componente ProjectDetail dinámicamente
-const ProjectDetail = dynamic(() => import('@/components/ProjectDetail'), {
-  ssr: false,
-  loading: () => (
-    <div className="flex items-center justify-center min-h-screen bg-white">
-      <div className="w-16 h-16 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
-    </div>
-  )
-});
+import ProjectDetail from '@/components/ProjectDetail';
 
 export default function ProjectPage() {
-  const params = useParams();
-  const id = params?.id;
-
   return (
     <Suspense fallback={
-      <div className="flex items-center justify-center min-h-screen bg-white">
-        <div className="w-16 h-16 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
+      <div className="min-h-screen bg-paper flex items-center justify-center">
+        <span className="font-mono text-[11px] text-graphite">Loading…</span>
       </div>
     }>
-      <ProjectDetail id={id} />
+      <ProjectDetail />
     </Suspense>
   );
 }

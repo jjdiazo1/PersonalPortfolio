@@ -1,53 +1,85 @@
-import { motion } from 'framer-motion';
-import { Project } from '@/lib/types'; // Asegúrate de que la ruta sea correcta
+'use client';
+
+import { useRef, useState } from 'react';
+import { motion, useInView, type Transition } from 'framer-motion';
+import { useRouter } from 'next/navigation';
+import { Project } from '@/lib/ProjectsData';
 
 interface ProjectCardProps {
   project: Project;
-  onClick: (project: Project) => void;
-  index: number;
-  darkMode: boolean;
+  featured?: boolean;
+  index?: number;
 }
 
-export default function ProjectCard({ project, onClick, index, darkMode }: ProjectCardProps) {
-  const borderClass = darkMode ? 'border-gray-800' : 'border-gray-200';
-  const secondaryTextClass = darkMode ? 'text-gray-400' : 'text-gray-600';
-  
+export default function ProjectCard({ project, featured = false, index = 0 }: ProjectCardProps) {
+  const router = useRouter();
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-15%' });
+  const [hovered, setHovered] = useState(false);
+
+  const spring: Transition = { type: 'spring', stiffness: 280, damping: 24, mass: 1 };
+
+  const handleClick = () => router.push(`/project/${project.id}`);
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.1, duration: 0.5 }}
-      className={`group cursor-pointer border ${borderClass} overflow-hidden rounded-lg`}
-      onClick={() => onClick(project)}
+      ref={ref}
+      initial={{ opacity: 0, y: 16 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ ...spring, delay: index * 0.05 }}
+      className="cursor-pointer border-b border-charcoal last:border-b-0"
+      onClick={handleClick}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{ backgroundColor: hovered ? '#f5f5f5' : '#ffffff', transition: 'background-color 150ms cubic-bezier(0.16,1,0.3,1)' }}
     >
-      <div className="relative overflow-hidden aspect-video">
-        <img 
-          src={project.image} 
+      {/* Image */}
+      <div
+        className={`w-full overflow-hidden ${featured ? 'aspect-video' : 'aspect-[4/3]'}`}
+        style={{ clipPath: inView ? 'inset(0 0 0% 0)' : 'inset(0 0 100% 0)', transition: 'clip-path 500ms cubic-bezier(0.16,1,0.3,1)' }}
+      >
+        <img
+          src={project.image}
           alt={project.title}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          className="w-full h-full object-cover"
+          style={{
+            transform: hovered ? 'scale(1.02)' : 'scale(1)',
+            transition: 'transform 300ms cubic-bezier(0.16,1,0.3,1)',
+          }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-          <div className="p-4 w-full">
-            <span className="inline-block px-2 py-1 text-xs rounded bg-indigo-500 text-white mb-2">
-              {project.category}
-            </span>
-            <h3 className="text-white font-bold text-lg">{project.title}</h3>
-          </div>
-        </div>
       </div>
-      <div className="p-4">
-        <h3 className="font-bold text-xl mb-2">{project.title}</h3>
-        <p className={`text-sm ${secondaryTextClass} mb-4`}>
-          {project.description.substring(0, 100)}...
-        </p>
-        <div className="flex flex-wrap gap-2">
-          {project.tags.map(tag => (
-            <span key={tag} className={`text-xs px-2 py-1 rounded-full ${darkMode ? 'bg-gray-800' : 'bg-gray-100'}`}>
-              {tag}
-            </span>
-          ))}
-        </div>
+
+      {/* Metadata row */}
+      <div className="border-t border-charcoal px-4 py-3 flex items-center justify-between">
+        <span
+          className="font-editorial font-[300] text-[16px] leading-[1.50] tracking-[-0.01em] text-charcoal"
+          style={{
+            transform: hovered ? 'translateX(4px)' : 'translateX(0)',
+            transition: 'transform 150ms cubic-bezier(0.16,1,0.3,1)',
+          }}
+        >
+          {project.title}
+        </span>
+        <span className="font-mono text-[11px] text-graphite whitespace-nowrap ml-4">
+          {project.year} · {project.category.split('/')[0].trim()}
+        </span>
       </div>
+
+      {/* Stack tags */}
+      <div className="px-4 pb-3">
+        <span className="font-condensed text-[11px] font-[400] uppercase tracking-[0.12em] text-graphite">
+          {project.tags.join('  ·  ')}
+        </span>
+      </div>
+
+      {/* Featured extra: description */}
+      {featured && (
+        <div className="px-4 pb-4">
+          <p className="font-editorial font-[400] text-[16px] leading-[1.50] tracking-[-0.01em] text-graphite line-clamp-1">
+            {project.description}
+          </p>
+        </div>
+      )}
     </motion.div>
   );
 }

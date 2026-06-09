@@ -1,49 +1,87 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion';
-import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-interface HeaderProps {
-  darkMode: boolean;
-  setDarkMode: (value: boolean) => void;
-  activeSection: string;
-  scrollToSection: (sectionId: string) => void;
-}
+export default function Header() {
+  const [visible, setVisible] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const lastY = useRef(0);
 
-export default function Header({ darkMode, setDarkMode, activeSection, scrollToSection }: HeaderProps) {
-  const borderClass = darkMode ? 'border-gray-800' : 'border-gray-200';
-  const borderHoverClass = darkMode ? 'hover:border-indigo-500' : 'hover:border-indigo-600';
-  const secondaryTextClass = darkMode ? 'text-gray-400' : 'text-gray-600';
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY;
+      setVisible(y < lastY.current || y < 60);
+      lastY.current = y;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
-  const navLinks = [
-    { id: 'home', label: 'Home' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'profile', label: 'Profile' },
-    { id: 'skills', label: 'Skills' },
-    { id: 'languages', label: 'Languages' },
-    { id: 'education', label: 'Education' },
-    { id: 'experience', label: 'Experience' }
-  ];
+  const scrollTo = (id: string) => {
+    setMenuOpen(false);
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-40">
-      <div className={`${darkMode ? 'bg-black' : 'bg-white'} border-b ${borderClass} transition-colors duration-300`}>
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
-            <Link href="/" className="text-xl font-bold">JJD</Link>
-          </motion.div>
-          <motion.nav initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="hidden md:flex space-x-6">
-            {navLinks.map(link => (
-              <button key={link.id} onClick={() => scrollToSection(link.id)} className={`text-sm uppercase tracking-wider transition-colors hover:text-indigo-400 ${activeSection === link.id ? 'text-indigo-500' : secondaryTextClass}`}>
-                {link.label}
+    <>
+      <motion.header
+        animate={{ y: visible ? 0 : -64 }}
+        transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        className="fixed top-0 left-0 right-0 z-50 bg-paper border-b border-charcoal"
+      >
+        <div className="max-w-page mx-auto px-5 md:px-12 h-12 md:h-14 flex items-center justify-between">
+          <span className="font-condensed text-[13px] font-medium uppercase tracking-[0.12em] text-charcoal">
+            JJD
+          </span>
+
+          <span className="hidden md:block font-mono text-[11px] text-graphite">
+            available for projects
+          </span>
+
+          <nav className="hidden md:flex gap-6">
+            {['work', 'about'].map((id) => (
+              <button
+                key={id}
+                onClick={() => scrollTo(id)}
+                className="font-condensed text-[13px] font-normal uppercase tracking-[0.12em] text-charcoal hover:border-b hover:border-charcoal pb-px"
+              >
+                {id}
               </button>
             ))}
-          </motion.nav>
-          <motion.button initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }} onClick={() => setDarkMode(!darkMode)} className={`p-2 rounded-full border ${borderClass} ${borderHoverClass}`}>
-            {darkMode ? '☀️' : '🌙'}
-          </motion.button>
+          </nav>
+
+          <button
+            className="md:hidden font-mono text-[18px] text-charcoal leading-none"
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-label="Toggle menu"
+          >
+            {menuOpen ? '×' : '≡'}
+          </button>
         </div>
-      </div>
-    </header>
+      </motion.header>
+
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ y: '100%' }}
+            animate={{ y: 0 }}
+            exit={{ y: '100%' }}
+            transition={{ type: 'spring', stiffness: 160, damping: 30, mass: 1.2 }}
+            className="fixed inset-x-0 bottom-0 z-50 bg-paper border-t border-charcoal"
+          >
+            {['work', 'about'].map((id, i) => (
+              <button
+                key={id}
+                onClick={() => scrollTo(id)}
+                className={`w-full text-left px-5 py-5 font-condensed text-[14px] font-medium uppercase tracking-[0.12em] text-charcoal${i > 0 ? ' border-t border-charcoal' : ''}`}
+              >
+                {id}
+              </button>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

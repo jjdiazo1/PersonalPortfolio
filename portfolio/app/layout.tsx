@@ -1,39 +1,40 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import { Inter, Montserrat } from 'next/font/google';
-import "./globals.css";
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import { Barlow_Condensed } from 'next/font/google';
+import { JetBrains_Mono } from 'next/font/google';
+import './globals.css';
 
-// Metadata personalizada
 export const metadata: Metadata = {
-  title: "Juan Jose Diaz - Portfolio",
-  description: "Juan Jose Diaz's portfolio, Systems and Computer Engineer.",
-  icons: {
-    icon: '/favicon.svg',
-  },
+  title: 'Juan Jose Diaz — Portfolio',
+  description: 'Systems Engineer · Founder · Building in public',
+  icons: { icon: '/favicon.svg' },
 };
 
-// Fonts
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
-const montserrat = Montserrat({ 
-  subsets: ['latin'], 
-  variable: '--font-montserrat',
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  weight: ['100', '200', '300', '400'],
   display: 'swap',
 });
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+const barlow = Barlow_Condensed({
+  subsets: ['latin'],
+  variable: '--font-barlow',
+  weight: ['300', '400', '500'],
+  display: 'swap',
+});
+
+const jetbrains = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-jetbrains',
+  weight: ['400'],
+  display: 'swap',
+});
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <head>
-        <title>Juan Jose Diaz | Portfolio</title>
-        <meta name="description" content="Systems and Computer Engineer with a passion for innovation" />
-      </head>
-      <body className={`${inter.variable} ${montserrat.variable} font-sans antialiased`}>
-        {children}
-      </body>
+    <html lang="en" className={`${inter.variable} ${barlow.variable} ${jetbrains.variable}`}>
+      <body className="bg-paper text-charcoal antialiased">{children}</body>
     </html>
   );
 }

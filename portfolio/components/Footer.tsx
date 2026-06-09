@@ -1,19 +1,31 @@
-'use client'
+'use client';
 
-interface FooterProps {
-  darkMode: boolean;
-}
-
-export default function Footer({ darkMode }: FooterProps) {
-  const secondaryTextClass = darkMode ? 'text-gray-400' : 'text-gray-600';
-  const borderClass = darkMode ? 'border-gray-800' : 'border-gray-200';
-
+export default function Footer() {
   return (
-    <footer className={`${darkMode ? 'bg-black' : 'bg-white'} ${borderClass} border-t py-8`}>
-      <div className="container mx-auto px-4 text-center">
-        <p className={`${secondaryTextClass} text-sm`}>
-          © {new Date().getFullYear()} Juan Jose Diaz. All rights reserved.
-        </p>
+    <footer className="border-t border-charcoal">
+      <div className="max-w-page mx-auto px-5 md:px-12 py-5 flex items-center justify-between">
+        <span className="font-condensed text-[13px] font-medium uppercase tracking-[0.12em] text-charcoal">
+          JJD
+        </span>
+        <div className="flex items-center gap-4">
+          {[
+            { label: 'Email', href: 'mailto:jj.diazoo@gmail.com' },
+            { label: 'GitHub', href: 'https://github.com/jjdiazo1' },
+            { label: 'LinkedIn', href: 'https://linkedin.com/in/jjdiazo' },
+          ].map(({ label, href }, i) => (
+            <span key={label} className="flex items-center gap-4">
+              {i > 0 && <span className="font-condensed text-[11px] text-graphite">·</span>}
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-condensed text-[11px] font-normal uppercase tracking-[0.12em] text-charcoal hover:border-b hover:border-charcoal pb-px"
+              >
+                {label}
+              </a>
+            </span>
+          ))}
+        </div>
       </div>
     </footer>
   );
