@@ -1,0 +1,105 @@
+<svg
+  width="512"
+  height="512"
+  viewBox="0 0 512 512"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <rect width="512" height="512" rx="48" fill="#05070D" />
+
+  <rect
+    x="48"
+    y="48"
+    width="416"
+    height="416"
+    rx="24"
+    fill="#0B1020"
+    stroke="#1F2A44"
+    stroke-width="4"
+  />
+
+  <path
+    d="M320 112H192V176H256V304C256 337.137 229.137 364 196 364H160V428H204C268.065 428 320 376.065 320 312V112Z"
+    fill="#E6F1FF"
+  />
+
+  <path
+    d="M320 112H384V176H320V112Z"
+    fill="#00E5FF"
+  />
+
+  <path
+    d="M128 364H192V428H128V364Z"
+    fill="#00E5FF"
+  />
+
+  <path
+    d="M352 208H400V256H352V208Z"
+    fill="#151C33"
+    stroke="#00E5FF"
+    stroke-width="6"
+  />
+
+  <path
+    d="M112 112H160V160H112V112Z"
+    fill="#151C33"
+    stroke="#7C3AED"
+    stroke-width="6"
+  />
+
+  <path
+    d="M96 288H144V336H96V288Z"
+    fill="#151C33"
+    stroke="#00E5FF"
+    stroke-width="6"
+  />
+
+  <path
+    d="M368 336H416V384H368V336Z"
+    fill="#151C33"
+    stroke="#7C3AED"
+    stroke-width="6"
+  />
+
+  <path
+    d="M160 136H208"
+    stroke="#7C3AED"
+    stroke-width="8"
+    stroke-linecap="square"
+  />
+
+  <path
+    d="M144 312H192"
+    stroke="#00E5FF"
+    stroke-width="8"
+    stroke-linecap="square"
+  />
+
+  <path
+    d="M320 232H352"
+    stroke="#00E5FF"
+    stroke-width="8"
+    stroke-linecap="square"
+  />
+
+  <path
+    d="M320 360H368"
+    stroke="#7C3AED"
+    stroke-width="8"
+    stroke-linecap="square"
+  />
+
+  <rect
+    x="72"
+    y="72"
+    width="368"
+    height="368"
+    stroke="#111A2E"
+    stroke-width="8"
+  />
+
+  <rect x="80" y="80" width="24" height="24" fill="#00E5FF" />
+  <rect x="408" y="80" width="24" height="24" fill="#7C3AED" />
+  <rect x="80" y="408" width="24" height="24" fill="#7C3AED" />
+  <rect x="408" y="408" width="24" height="24" fill="#00E5FF" />
+</svg>
