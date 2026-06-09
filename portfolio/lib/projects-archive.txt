@@ -1,0 +1,21 @@
+    // {
+      //   "id": 7,
+      //   "title": "ML for Biomedical Systems",
+      //   "category": "Applied Machine Learning",
+      //   "description": "Applied machine learning models for biomedical and environmental datasets.",
+      //   "fullDescription": "This is a compilation of academic projects developed for the Fundamentals of Machine Learning course in the Biomedical Engineering program. The goal was to explore and implement core machine learning algorithms using real-world datasets provided by the department. The project includes models for linear and polynomial regression, logistic regression, clustering (K-means), and feedforward neural networks. Applications range from greenhouse climate analysis to medical patient clustering and binary classification tasks. \n\nEach model was implemented from scratch in Python, focusing on visual interpretation, parameter estimation, and decision boundary generation. The project allowed for a deep understanding of ML fundamentals and their relevance to biomedical and environmental problem-solving.",
+      //   "tags": ["Python", "Machine Learning", "Biomedical", "Regression", "K-Means", "Neural Networks"],
+      //   "image": "/Project 6/1.png",
+      //   "fullImage": "/Project 6/2.png",
+      //   "additionalImages": [
+      //     "/Project 6/3.png",
+      //     "/Project 6/4.png",
+      //     "/Project 6/5.png",
+      //     "/Project 6/1.png"
+      //   ],
+      //   "client": "Universidad de los Andes – Biomedical Engineering Dept.",
+      //   "year": "2024",
+      //   "timeline": "2 months",
+      //   "role": "ML Engineer & Visual Analyst",
+      //   "liveUrl": ""
+      // },
