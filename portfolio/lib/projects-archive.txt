@@ -19,3 +19,20 @@
       //   "role": "ML Engineer & Visual Analyst",
       //   "liveUrl": ""
       // },
+
+  {
+        "id": 4,
+        "title": "Immunity Network",
+        "category": "Game / Network Simulation",
+        "description": "An interactive simulation of how a pandemic spreads through a social network.",
+        "fullDescription": "Immunity Network is an educational interactive game developed for the course 'Games, Networks, and Complexity' at Universidad de Los Andes. It simulates the spread of a pandemic through a social network built by the players themselves. With real-time visualizations, vaccination strategies, and multiple game modes, participants explore concepts such as herd immunity, super-spreaders, and epidemic control. Designed to foster understanding of network theory and epidemiology in a collaborative and strategic setting.",
+        "tags": ["Educational", "Simulation", "Networks", "Interactive", "Epidemiology", "Game"],
+        "image": "/Project 4/1.png",
+        "fullImage": "/Project 4/5.png",
+        "additionalImages": ["/Project 4/2.png", "/Project 4/3.png", "/Project 4/1.png", "/Project 4/6.png"],
+        "client": "Universidad de Los Andes – Educational Project",
+        "year": "2025",
+        "timeline": "1 month",
+        "role": "Lead Game Designer & Developer",
+        "liveUrl": "https://pandemic-simulator-game.vercel.app/register"
+      },
