@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import heroData from '@/lib/hero-data.json';
 import HeroCollage from '@/components/HeroCollage';
 
-const TYPEWRITER_TEXT = 'Systems Engineer · Founder · Building in public';
+const TYPEWRITER_TEXT = 'Systems Engineer · Founder · Making cool stuff';
 
 /* Ticker content: items joined with separator, NO padding on spans —
    spacing lives entirely in the string so both copies are pixel-identical. */

@@ -6,7 +6,7 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: 'Juan Jose Diaz — Portfolio',
-  description: 'Systems Engineer · Founder · Building in public',
+  description: 'Systems Engineer · Founder · Building cool stuff',
   icons: { icon: '/favicon.svg' },
 };
 

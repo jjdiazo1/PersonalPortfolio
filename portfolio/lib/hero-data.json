@@ -1,18 +1,16 @@
 {
   "stats": [
-    { "value": "3",      "label": "In Production" },
-    { "value": "2",      "label": "Own Products"  },
+    { "value": "6+",      "label": "Years of CS study" },
+    { "value": "2",      "label": "Startups"  },
     { "value": "Open",   "label": "For Work"      },
-    { "value": "Q2 26",  "label": "Current Period"},
-    { "value": "BOG",    "label": "Bogotá, CO"    }
+    { "value": "3+",   "label": "Past jobs in the field" },
+    { "value": "LYN",    "label": "Lyon, FR"    }
   ],
   "tickerItems": [
-    "3 projects in production",
-    "Bogotá, Colombia",
-    "Available for projects",
-    "Q2 2026",
-    "2 own products",
+    "Lyon, France",
+    "Working on 2 startups",
     "Systems Engineer",
+    "Computer Science",
     "Founder"
   ]
 }
