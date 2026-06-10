@@ -25,7 +25,7 @@ function GlitchTile({
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Base image — scale + desaturate on hover */}
+      {/* Base image — subtle scale on hover */}
       <motion.img
         src={project.heroImage}
         alt={project.title}
@@ -33,35 +33,37 @@ function GlitchTile({
         animate={{
           scale: hovered ? 1.04 : 1,
           filter: hovered
-            ? 'brightness(1.15) contrast(1.2) grayscale(0.3)'
+            ? 'brightness(0.75) contrast(1.05) grayscale(0.1)'
             : 'brightness(1) contrast(1) grayscale(0)',
         }}
         transition={{ type: 'spring', stiffness: 280, damping: 24 }}
       />
 
-      {/* Glitch ghost layer — second copy sliced with clip-path animation */}
-      {hovered && (
-        <img
-          src={project.heroImage}
-          alt=""
-          aria-hidden
-          className="absolute inset-0 w-full h-full object-cover glitch-layer pointer-events-none"
-          style={{
-            filter: 'brightness(2) contrast(3) grayscale(1)',
-            mixBlendMode: 'screen',
-          }}
-        />
-      )}
+      {/* Editorial overlay — dark vignette tint */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: 'linear-gradient(to top, rgba(20,20,20,0.55) 0%, rgba(20,20,20,0.05) 55%, transparent 100%)' }}
+        animate={{ opacity: hovered ? 1 : 0 }}
+        transition={{ duration: 0.25 }}
+      />
 
-      {/* Horizontal scan line that sweeps on hover */}
-      {hovered && (
-        <motion.div
-          className="absolute inset-x-0 h-px bg-charcoal pointer-events-none"
-          initial={{ top: '0%', opacity: 0 }}
-          animate={{ top: ['0%', '100%'], opacity: [0, 0.6, 0] }}
-          transition={{ duration: 0.8, repeat: Infinity, ease: 'linear' }}
-        />
-      )}
+      {/* Crosshair corner marks — top-right */}
+      <motion.div
+        className="absolute top-3 right-3 pointer-events-none"
+        animate={{ opacity: hovered ? 1 : 0 }}
+        transition={{ duration: 0.2 }}
+      >
+        <div className="w-3 h-3 border-t border-r border-paper opacity-70" />
+      </motion.div>
+
+      {/* Crosshair corner marks — bottom-left */}
+      <motion.div
+        className="absolute bottom-12 left-2 pointer-events-none"
+        animate={{ opacity: hovered ? 1 : 0 }}
+        transition={{ duration: 0.2 }}
+      >
+        <div className="w-3 h-3 border-b border-l border-paper opacity-70" />
+      </motion.div>
 
       {/* Index stamp — always visible, top-left */}
       <div className="absolute top-2 left-2 pointer-events-none">
@@ -72,24 +74,16 @@ function GlitchTile({
 
       {/* Label — slides up from bottom on hover */}
       <motion.div
-        className="absolute bottom-0 inset-x-0 bg-charcoal px-2 pt-1.5 pb-2 pointer-events-none"
+        className="absolute bottom-0 inset-x-0 px-2 pt-1.5 pb-2 pointer-events-none"
         initial={{ y: '100%' }}
         animate={{ y: hovered ? 0 : '100%' }}
         transition={{ type: 'spring', stiffness: 400, damping: 32 }}
       >
-        <p
-          className="font-condensed text-[10px] uppercase tracking-[0.12em] text-paper leading-tight truncate"
-          style={hovered ? { animation: 'none' } : {}}
-        >
+        <p className="font-condensed text-[10px] uppercase tracking-[0.12em] text-paper leading-tight truncate">
           {project.title}
         </p>
         <p className="font-mono text-[9px] text-graphite leading-none mt-0.5">{project.year}</p>
       </motion.div>
-
-      {/* Jitter wrapper — subtle X shake on hover */}
-      {hovered && (
-        <div className="absolute inset-0 pointer-events-none glitch-jitter" />
-      )}
     </div>
   );
 }

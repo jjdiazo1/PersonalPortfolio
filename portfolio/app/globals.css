@@ -95,29 +95,3 @@ body {
 .hero-reveal {
   animation: hero-reveal 400ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
-
-/* ─── Collage glitch helpers ─── */
-@keyframes glitch-slice {
-  0%  { clip-path: inset(0 0 100% 0); transform: translateX(0);   opacity: 0; }
-  15% { clip-path: inset(15% 0 60% 0); transform: translateX(-4px); opacity: 0.85; }
-  30% { clip-path: inset(55% 0 20% 0); transform: translateX(4px);  opacity: 0.7; }
-  45% { clip-path: inset(80% 0 5%  0); transform: translateX(-2px); opacity: 0.9; }
-  60% { clip-path: inset(30% 0 45% 0); transform: translateX(3px);  opacity: 0.6; }
-  80% { clip-path: inset(0 0 100% 0); transform: translateX(0);   opacity: 0; }
-  100%{ clip-path: inset(0 0 100% 0); transform: translateX(0);   opacity: 0; }
-}
-.glitch-layer {
-  animation: glitch-slice 0.55s steps(1) infinite;
-}
-
-@keyframes glitch-jitter {
-  0%   { transform: translateX(0); }
-  20%  { transform: translateX(-3px); }
-  40%  { transform: translateX(3px); }
-  60%  { transform: translateX(-2px); }
-  80%  { transform: translateX(2px); }
-  100% { transform: translateX(0); }
-}
-.glitch-jitter {
-  animation: glitch-jitter 0.3s steps(1) infinite;
-}
