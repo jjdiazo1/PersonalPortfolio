@@ -1,16 +1,16 @@
 'use client';
 
-import footerData from '@/lib/footer-data.json';
+import type { SiteConfig } from '@/lib/types';
 
-export default function Footer() {
+export default function Footer({ siteConfig }: { siteConfig: SiteConfig }) {
   return (
     <footer className="mt-auto">
       <div className="px-5 md:px-12 py-5 flex items-center justify-between">
         <span className="font-condensed text-[13px] font-medium uppercase tracking-[0.12em] text-charcoal">
-          {footerData.logo}
+          {siteConfig.logo}
         </span>
         <div className="flex items-center gap-4">
-          {footerData.links.map(({ label, href }, i) => (
+          {siteConfig.footerLinks.map(({ label, href }, i) => (
             <span key={label} className="flex items-center gap-4">
               {i > 0 && <span className="font-condensed text-[11px] text-graphite">·</span>}
               <a

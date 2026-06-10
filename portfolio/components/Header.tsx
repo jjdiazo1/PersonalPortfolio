@@ -2,9 +2,9 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import headerData from '@/lib/header-data.json';
+import type { SiteConfig } from '@/lib/types';
 
-export default function Header() {
+export default function Header({ siteConfig }: { siteConfig: SiteConfig }) {
   const [visible, setVisible] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
   const lastY = useRef(0);
@@ -33,15 +33,15 @@ export default function Header() {
       >
         <div className="px-5 md:px-12 h-12 md:h-14 flex items-center justify-between">
           <span className="font-condensed text-[13px] font-medium uppercase tracking-[0.12em] text-charcoal">
-            {headerData.logo}
+            {siteConfig.logo}
           </span>
 
           <span className="hidden md:block font-mono text-[11px] text-graphite">
-            {headerData.statusLabel}
+            {siteConfig.statusLabel}
           </span>
 
           <nav className="hidden md:flex gap-6">
-            {headerData.navItems.map((id) => (
+            {siteConfig.navItems.map((id) => (
               <button
                 key={id}
                 onClick={() => scrollTo(id)}
@@ -71,7 +71,7 @@ export default function Header() {
             transition={{ type: 'spring', stiffness: 160, damping: 30, mass: 1.2 }}
             className="fixed inset-x-0 bottom-0 z-50 bg-paper border-t border-charcoal"
           >
-            {headerData.navItems.map((id, i) => (
+            {siteConfig.navItems.map((id, i) => (
               <button
                 key={id}
                 onClick={() => scrollTo(id)}

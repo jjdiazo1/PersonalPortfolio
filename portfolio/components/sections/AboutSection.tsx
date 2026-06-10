@@ -2,9 +2,9 @@
 
 import { useRef } from 'react';
 import { motion, useInView, type Transition } from 'framer-motion';
-import aboutData from '@/lib/about-data.json';
+import type { AboutData } from '@/lib/types';
 
-export default function AboutSection() {
+export default function AboutSection({ aboutData }: { aboutData: AboutData }) {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: '-15%' });
   const spring: Transition = { type: 'spring', stiffness: 280, damping: 24, mass: 1 };
@@ -14,9 +14,9 @@ export default function AboutSection() {
       <div className="px-5 md:px-12">
         <div className="flex items-center justify-between py-3 border-b border-charcoal">
           <span className="font-condensed text-[11px] font-[500] uppercase tracking-[0.12em] text-charcoal">
-            {aboutData.sectionLabel}
+            About
           </span>
-          <span className="font-mono text-[11px] text-graphite">{aboutData.sectionIndex}</span>
+          <span className="font-mono text-[11px] text-graphite">02</span>
         </div>
       </div>
 

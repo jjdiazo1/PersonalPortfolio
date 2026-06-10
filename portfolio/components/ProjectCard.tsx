@@ -3,7 +3,8 @@
 import { useRef, useState } from 'react';
 import { motion, useInView, type Transition } from 'framer-motion';
 import { useRouter } from 'next/navigation';
-import { Project } from '@/lib/ProjectsData';
+import Image from 'next/image';
+import type { Project } from '@/lib/types';
 
 interface ProjectCardProps {
   project: Project;
@@ -19,7 +20,7 @@ export default function ProjectCard({ project, featured = false, index = 0 }: Pr
 
   const spring: Transition = { type: 'spring', stiffness: 280, damping: 24, mass: 1 };
 
-  const handleClick = () => router.push(`/project/${project.id}`);
+  const handleClick = () => router.push(`/project/${project.slug}`);
 
   return (
     <motion.div
@@ -35,13 +36,14 @@ export default function ProjectCard({ project, featured = false, index = 0 }: Pr
     >
       {/* Image */}
       <div
-        className={`w-full overflow-hidden ${featured ? 'aspect-video' : 'aspect-[4/3]'}`}
+        className={`w-full overflow-hidden relative ${featured ? 'aspect-video' : 'aspect-[4/3]'}`}
         style={{ clipPath: inView ? 'inset(0 0 0% 0)' : 'inset(0 0 100% 0)', transition: 'clip-path 500ms cubic-bezier(0.16,1,0.3,1)' }}
       >
-        <img
+        <Image
           src={project.image}
           alt={project.title}
-          className="w-full h-full object-cover"
+          fill
+          className="object-cover"
           style={{
             transform: hovered ? 'scale(1.02)' : 'scale(1)',
             transition: 'transform 300ms cubic-bezier(0.16,1,0.3,1)',
@@ -72,7 +74,6 @@ export default function ProjectCard({ project, featured = false, index = 0 }: Pr
         </span>
       </div>
 
-      {/* Featured extra: description */}
       {featured && (
         <div className="px-4 pb-4">
           <p className="font-editorial font-[400] text-[16px] leading-[1.50] tracking-[-0.01em] text-graphite line-clamp-1">
