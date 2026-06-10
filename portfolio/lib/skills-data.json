@@ -1,0 +1,17 @@
+[
+  { "skill": "JavaScript", "logo": "/Logos/js.png" },
+  { "skill": "Flutter", "logo": "/Logos/flutter.png" },
+  { "skill": "Java", "logo": "/Logos/java.png" },
+  { "skill": "Python", "logo": "/Logos/python.png" },
+  { "skill": "React", "logo": "/Logos/react.png" },
+  { "skill": "C", "logo": "/Logos/c.png" },
+  { "skill": "Swift", "logo": "/Logos/swift.png" },
+  { "skill": "XCode", "logo": "/Logos/xcode.png" },
+  { "skill": "PostgreSQL", "logo": "/Logos/postgre.png" },
+  { "skill": "MongoDB", "logo": "/Logos/mongo.png" },
+  { "skill": "Premiere Pro", "logo": "/Logos/premiere.png" },
+  { "skill": "Git", "logo": "/Logos/git.png" },
+  { "skill": "Matplotlib", "logo": "/Logos/matplotlib.png" },
+  { "skill": "Excel", "logo": "/Logos/excel.png" },
+  { "skill": "Illustrator", "logo": "/Logos/illustrator.png" }
+]

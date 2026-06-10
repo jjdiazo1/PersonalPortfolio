@@ -1,0 +1,14 @@
+{
+  "sectionLabel": "About",
+  "sectionIndex": "02",
+  "statement": "I build digital products from the foundations — code, architecture, and the moment when the idea becomes real.",
+  "bio": [
+    "Systems and Computer Engineering student at Universidad de Los Andes, Bogotá. I build products end-to-end — from architecture decisions to the last pixel — with a founder's sense of urgency and an engineer's rigor.",
+    "I care about systems that scale and interfaces that feel inevitable. When I'm not shipping, I'm exploring the intersection of product design and distributed systems."
+  ],
+  "links": [
+    { "label": "→ GitHub", "href": "https://github.com/jjdiazo1" },
+    { "label": "→ LinkedIn", "href": "https://linkedin.com/in/jjdiazo" },
+    { "label": "→ Email", "href": "mailto:jj.diazoo@gmail.com" }
+  ]
+}
