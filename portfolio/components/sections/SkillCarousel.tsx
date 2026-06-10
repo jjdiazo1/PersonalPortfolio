@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 interface Skill {
   skill: string;
@@ -61,10 +62,11 @@ export default function SkillsCarousel({ darkMode }: SkillsCarouselProps) {
                     : 'hover:bg-white/50'
                 }`}>
                   <div className="relative w-16 h-16 transition-transform duration-300 group-hover:scale-110">
-                    <img
+                    <Image
                       src={skill.logo}
                       alt={skill.skill}
-                      className="w-full h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300"
+                      fill
+                      className="object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300"
                     />
                   </div>
                   <span className={`text-sm font-medium ${darkMode ? 'text-gray-400 group-hover:text-gray-200' : 'text-gray-600 group-hover:text-gray-900'} transition-colors`}>

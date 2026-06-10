@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
+import Image from 'next/image';
 import SkillsCarousel from './SkillCarousel';
 
 interface HomeSectionProps {
@@ -20,7 +21,6 @@ export default function HomeSection({ darkMode, scrollToSection }: HomeSectionPr
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -28,12 +28,8 @@ export default function HomeSection({ darkMode, scrollToSection }: HomeSectionPr
     };
     window.addEventListener('mousemove', handleMouseMove);
     
-    // Loading animation
-    const timer = setTimeout(() => setIsLoading(false), 2000);
-    
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-      clearTimeout(timer);
     };
   }, []);
 
@@ -189,10 +185,11 @@ export default function HomeSection({ darkMode, scrollToSection }: HomeSectionPr
                 {/* Profile container */}
                 <div className="relative w-72 h-72 md:w-96 md:h-96">
                   <div className={`absolute inset-0 rounded-full border-4 ${darkMode ? 'border-gray-800' : 'border-white'} shadow-2xl overflow-hidden`}>
-                    <img
+                    <Image
                       src="/Profile.png"
                       alt="Juan José Díaz"
-                      className="w-full h-full object-cover object-center object-[center_20%] group-hover:scale-110 transition-transform duration-500"
+                      fill
+                      className="object-cover object-center object-[center_20%] group-hover:scale-110 transition-transform duration-500"
                     />
                   </div>
                 </div>

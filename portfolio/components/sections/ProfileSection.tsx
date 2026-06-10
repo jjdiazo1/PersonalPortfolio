@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { useInView } from 'react-intersection-observer';
 
 interface ProfileSectionProps {
@@ -25,10 +26,11 @@ export default function ProfileSection({ darkMode }: ProfileSectionProps) {
         <div className={`border ${borderClass} p-8 rounded-lg`}>
           <div className="relative w-32 h-32 mx-auto mb-6 group">
             <div className="absolute inset-0 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 opacity-0 transition-opacity group-hover:opacity-20"></div>
-            <img
+            <Image
               src="/Profile.jpg"
               alt="Profile"
-              className={`rounded-full h-full w-full object-cover border-4 ${borderClass} relative z-10`}
+              fill
+              className={`rounded-full object-cover border-4 ${borderClass} relative z-10`}
             />
           </div>
           <p className="text-lg mb-4">

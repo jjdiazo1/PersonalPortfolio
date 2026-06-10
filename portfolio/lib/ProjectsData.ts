@@ -1,6 +1,6 @@
 // Definición del tipo Project
 export interface Project {
-    heroImage: any;
+    heroImage: string;
     id: number;
     title: string;
     category: string;

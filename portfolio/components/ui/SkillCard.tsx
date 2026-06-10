@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 interface SkillCardProps {
   skill: string;
@@ -33,12 +34,14 @@ export default function SkillCard({ skill, logo, darkMode }: SkillCardProps) {
 
       {/* Logo */}
       {logo ? (
-        <img
-          src={logo}
-          alt={skill}
-          className="relative z-10 h-12 w-12 object-contain"
-          style={{ maxWidth: '64px', maxHeight: '64px' }}
-        />
+        <div className="relative z-10 h-12 w-12">
+          <Image
+            src={logo}
+            alt={skill}
+            fill
+            className="object-contain"
+          />
+        </div>
       ) : (
         <p className={`relative z-10 font-semibold text-center text-sm ${textClass}`}>{skill}</p>
       )}
