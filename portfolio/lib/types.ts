@@ -10,6 +10,7 @@ export interface HeroData {
   lastName: string
   typewriterText: string
   profilePhotoUrl: string
+  profilePhotoMobileUrl?: string
   stats: { value: string; label: string }[]
   tickerItems: string[]
 }

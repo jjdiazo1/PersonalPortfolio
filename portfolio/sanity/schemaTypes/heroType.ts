@@ -10,7 +10,14 @@ export const heroType = defineType({
     defineField({ name: 'typewriterText', title: 'Typewriter text', type: 'string' }),
     defineField({
       name: 'profilePhoto',
-      title: 'Profile photo',
+      title: 'Profile photo (desktop)',
+      type: 'image',
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: 'profilePhotoMobile',
+      title: 'Profile photo (mobile)',
+      description: 'Optional. If not set, the desktop photo is used on mobile.',
       type: 'image',
       options: { hotspot: true },
     }),

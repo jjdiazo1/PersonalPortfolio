@@ -12,6 +12,7 @@ export const heroQuery = groq`*[_type == "hero"][0]{
   lastName,
   typewriterText,
   "profilePhotoUrl": profilePhoto.asset->url,
+  "profilePhotoMobileUrl": profilePhotoMobile.asset->url,
   stats[]{ value, label },
   tickerItems
 }`

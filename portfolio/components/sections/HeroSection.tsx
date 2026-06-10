@@ -84,7 +84,7 @@ export default function HeroSection({ heroData }: { heroData: HeroData }) {
         <div className="relative border-t border-charcoal md:border-t-0">
           <div className="md:hidden h-[220px] overflow-hidden">
             <Image
-              src={heroData.profilePhotoUrl}
+              src={heroData.profilePhotoMobileUrl ?? heroData.profilePhotoUrl}
               alt={`${heroData.firstName} ${heroData.lastName}`}
               fill
               className="object-cover object-[center_15%]"
