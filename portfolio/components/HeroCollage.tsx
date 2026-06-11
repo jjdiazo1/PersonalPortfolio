@@ -3,7 +3,8 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
-import { Project, getAllProjects } from '@/lib/ProjectsData';
+import { getProjects } from '@/sanity/lib/fetch';
+import type { Project } from '@/lib/types';
 
 /* ─── Individual collage tile ─── */
 function GlitchTile({
@@ -94,7 +95,7 @@ export default function HeroCollage() {
   const router = useRouter();
 
   useEffect(() => {
-    getAllProjects().then(setProjects).catch(console.error);
+    getProjects().then(setProjects).catch(console.error);
   }, []);
 
   if (!projects.length) return null;
@@ -105,10 +106,10 @@ export default function HeroCollage() {
       <div className="hidden md:flex divide-x divide-charcoal">
         {projects.map((p, i) => (
           <GlitchTile
-            key={p.id}
+            key={p._id}
             project={p}
             index={i}
-            onClick={() => router.push(`/project/${p.id}`)}
+            onClick={() => router.push(`/project/${p.slug}`)}
           />
         ))}
       </div>
@@ -116,11 +117,11 @@ export default function HeroCollage() {
       {/* Mobile: horizontal scroll */}
       <div className="md:hidden flex overflow-x-auto snap-x snap-mandatory scrollbar-none">
         {projects.map((p, i) => (
-          <div key={p.id} className="snap-start shrink-0 w-[52vw] border-r border-charcoal last:border-r-0">
+          <div key={p._id} className="snap-start shrink-0 w-[52vw] border-r border-charcoal last:border-r-0">
             <GlitchTile
               project={p}
               index={i}
-              onClick={() => router.push(`/project/${p.id}`)}
+              onClick={() => router.push(`/project/${p.slug}`)}
             />
           </div>
         ))}
