@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
-import { getProjects } from '@/sanity/lib/fetch';
 import type { Project } from '@/lib/types';
+
 
 /* ─── Individual collage tile ─── */
 function GlitchTile({
@@ -90,13 +90,8 @@ function GlitchTile({
 }
 
 /* ─── Collage strip ─── */
-export default function HeroCollage() {
-  const [projects, setProjects] = useState<Project[]>([]);
+export default function HeroCollage({ projects }: { projects: Project[] }) {
   const router = useRouter();
-
-  useEffect(() => {
-    getProjects().then(setProjects).catch(console.error);
-  }, []);
 
   if (!projects.length) return null;
 

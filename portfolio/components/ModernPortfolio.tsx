@@ -24,7 +24,7 @@ export default function Portfolio({ siteConfig, heroData, aboutData, education, 
       <Header siteConfig={siteConfig} />
       <div className="border-b border-charcoal min-h-screen flex flex-col">
         <main className="pt-12 md:pt-14 flex-1">
-          <HeroSection heroData={heroData} />
+          <HeroSection heroData={heroData} projects={projects} />
           <ProjectsSection projects={projects} />
           <AboutSection aboutData={aboutData} />
           <EducationSection education={education} />

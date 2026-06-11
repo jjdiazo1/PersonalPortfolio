@@ -45,6 +45,13 @@ export const projectType = defineType({
     defineField({ name: 'role', title: 'Role', type: 'string' }),
     defineField({ name: 'liveUrl', title: 'Live URL', type: 'url' }),
     defineField({ name: 'order', title: 'Display order', type: 'number' }),
+    defineField({
+      name: 'featuredInHero',
+      title: 'Featured in hero collage',
+      type: 'boolean',
+      initialValue: false,
+      description: 'Show this project in the hero collage on the homepage',
+    }),
   ],
   orderings: [{ title: 'Order', name: 'orderAsc', by: [{ field: 'order', direction: 'asc' }] }],
   preview: {

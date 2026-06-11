@@ -46,6 +46,7 @@ export interface Project {
   timeline?: string
   role?: string
   liveUrl?: string
+  featuredInHero?: boolean
 }
 
 export interface Job {

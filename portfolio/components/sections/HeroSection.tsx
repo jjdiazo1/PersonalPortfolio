@@ -4,9 +4,9 @@ import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import HeroCollage from '@/components/HeroCollage';
-import type { HeroData } from '@/lib/types';
+import type { HeroData, Project } from '@/lib/types';
 
-export default function HeroSection({ heroData }: { heroData: HeroData }) {
+export default function HeroSection({ heroData, projects }: { heroData: HeroData; projects: Project[] }) {
   const [typed, setTyped]           = useState('');
   const [showCursor, setShowCursor] = useState(false);
   const [revealed, setRevealed]     = useState(false);
@@ -110,7 +110,7 @@ export default function HeroSection({ heroData }: { heroData: HeroData }) {
       </div>
 
       {/* ── Project collage ── */}
-      <HeroCollage />
+      <HeroCollage projects={projects.filter((p) => p.featuredInHero)} />
 
       {/* ── Stats strip ── */}
       <div className="border-t border-charcoal grid grid-cols-5 divide-x divide-charcoal">
