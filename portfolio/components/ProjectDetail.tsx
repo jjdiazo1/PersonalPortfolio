@@ -42,22 +42,6 @@ export default function ProjectDetail({ project, allProjects }: ProjectDetailPro
       </header>
 
       <main className="pt-12 md:pt-14">
-        {/* Hero image */}
-        {project.heroImage && (
-          <motion.div
-            layoutId={`project-image-${project.slug}`}
-            className="w-full aspect-video overflow-hidden relative"
-          >
-            <Image
-              src={project.heroImage}
-              alt={project.title}
-              fill
-              className="object-cover"
-              priority
-            />
-          </motion.div>
-        )}
-
         <div className="border-t border-charcoal" />
 
         {/* Content */}
@@ -117,7 +101,7 @@ export default function ProjectDetail({ project, allProjects }: ProjectDetailPro
               <div className="grid grid-cols-2 divide-x divide-y divide-charcoal border border-charcoal">
                 {project.additionalImages.map((img, i) => (
                   <div key={i} className="aspect-video overflow-hidden relative">
-                    <Image src={img} alt={`${project.title} ${i + 1}`} fill className="object-cover" />
+                    <Image src={img} alt={`${project.title} ${i + 1}`} fill className="object-cover" loading="lazy" />
                   </div>
                 ))}
               </div>
