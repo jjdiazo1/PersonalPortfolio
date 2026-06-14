@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
+import ReactMarkdown from 'react-markdown';
 import type { Project } from '@/lib/types';
 
 interface ProjectDetailProps {
@@ -67,12 +68,10 @@ export default function ProjectDetail({ project, allProjects }: ProjectDetailPro
               <h1 className="font-editorial font-[300] text-[32px] leading-[1.20] tracking-[-0.02em] text-charcoal mb-4">
                 {project.title}
               </h1>
-              <div className="space-y-4">
-                {(project.fullDescription || project.description).split('\n\n').map((para, i) => (
-                  <p key={i} className="font-editorial font-[400] text-[16px] leading-[1.50] tracking-[-0.01em] text-charcoal">
-                    {para}
-                  </p>
-                ))}
+              <div className="prose prose-charcoal max-w-none space-y-4 font-editorial font-[400] text-[16px] leading-[1.50] tracking-[-0.01em] text-charcoal [&_p]:mb-4 [&_h1]:font-editorial [&_h1]:font-[300] [&_h1]:text-[24px] [&_h2]:font-editorial [&_h2]:font-[300] [&_h2]:text-[20px] [&_h3]:font-editorial [&_h3]:font-[300] [&_h3]:text-[17px] [&_strong]:font-[600] [&_em]:italic [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_li]:mb-1 [&_a]:underline [&_a]:underline-offset-2 [&_code]:font-mono [&_code]:text-[14px] [&_blockquote]:border-l-2 [&_blockquote]:border-charcoal [&_blockquote]:pl-4 [&_blockquote]:italic">
+                <ReactMarkdown>
+                  {project.fullDescription || project.description}
+                </ReactMarkdown>
               </div>
             </div>
 
