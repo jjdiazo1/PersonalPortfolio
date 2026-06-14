@@ -47,6 +47,7 @@ export interface Project {
   role?: string
   liveUrl?: string
   featuredInHero?: boolean
+  tier?: 'primary' | 'secondary' | 'mini'
 }
 
 export interface Job {

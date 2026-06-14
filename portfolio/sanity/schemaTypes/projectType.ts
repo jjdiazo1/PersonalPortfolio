@@ -44,6 +44,21 @@ export const projectType = defineType({
     defineField({ name: 'timeline', title: 'Timeline', type: 'string' }),
     defineField({ name: 'role', title: 'Role', type: 'string' }),
     defineField({ name: 'liveUrl', title: 'Live URL', type: 'url' }),
+    defineField({
+      name: 'tier',
+      title: 'Tier',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Primary (2 columns)', value: 'primary' },
+          { title: 'Secondary (3 columns)', value: 'secondary' },
+          { title: 'Mini (6 per row)', value: 'mini' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'primary',
+      description: 'Controls which grid section the project appears in',
+    }),
     defineField({ name: 'order', title: 'Display order', type: 'number' }),
     defineField({
       name: 'featuredInHero',

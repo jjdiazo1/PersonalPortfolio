@@ -4,6 +4,7 @@ import Header from './Header';
 import Footer from './Footer';
 import HeroSection from './sections/HeroSection';
 import ProjectsSection from './ProjectsSection';
+import SideProjectsSection from './SideProjectsSection';
 import AboutSection from './sections/AboutSection';
 import EducationSection from './sections/EducationSection';
 import type { SiteConfig, HeroData, AboutData, Education, Project, Job, Skill } from '@/lib/types'
@@ -28,6 +29,7 @@ export default function Portfolio({ siteConfig, heroData, aboutData, education, 
           <ProjectsSection projects={projects} />
           <AboutSection aboutData={aboutData} />
           <EducationSection education={education} />
+          <SideProjectsSection projects={projects} />
         </main>
         <Footer siteConfig={siteConfig} />
       </div>

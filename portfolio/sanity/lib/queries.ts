@@ -48,7 +48,8 @@ export const projectsQuery = groq`*[_type == "project"] | order(order asc){
   timeline,
   role,
   liveUrl,
-  featuredInHero
+  featuredInHero,
+  tier
 }`
 
 export const projectBySlugQuery = groq`*[_type == "project" && slug.current == $slug][0]{
