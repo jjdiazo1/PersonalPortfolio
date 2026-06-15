@@ -23,7 +23,12 @@ export const jobType = defineType({
       type: 'array',
       of: [{ type: 'string' }],
     }),
-    defineField({ name: 'logo', title: 'Logo path (e.g. /Logos/company.png)', type: 'string' }),
+    defineField({
+      name: 'logo',
+      title: 'Company Logo',
+      type: 'image',
+      options: { hotspot: true },
+    }),
     defineField({ name: 'order', title: 'Display order', type: 'number' }),
   ],
   orderings: [{ title: 'Order', name: 'orderAsc', by: [{ field: 'order', direction: 'asc' }] }],

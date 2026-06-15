@@ -51,7 +51,7 @@ export default function MiniProjectCard({ project, index = 0 }: { project: Proje
           <span className="font-mono text-[10px] text-graphite whitespace-nowrap shrink-0">{project.year}</span>
         </div>
         <span className="font-condensed text-[10px] font-[400] uppercase tracking-[0.12em] text-graphite line-clamp-1">
-          {project.tags.slice(0, 2).join('  ·  ')}
+          {(project.tags ?? []).slice(0, 2).join('  ·  ')}
         </span>
       </div>
     </motion.div>

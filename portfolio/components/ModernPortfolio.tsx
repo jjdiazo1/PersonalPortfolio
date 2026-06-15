@@ -7,6 +7,7 @@ import ProjectsSection from './ProjectsSection';
 import SideProjectsSection from './SideProjectsSection';
 import AboutSection from './sections/AboutSection';
 import EducationSection from './sections/EducationSection';
+import ExperienceSection from './sections/ExperienceSection';
 import type { SiteConfig, HeroData, AboutData, Education, Project, Job, Skill } from '@/lib/types'
 
 interface PortfolioProps {
@@ -19,7 +20,7 @@ interface PortfolioProps {
   skills: Skill[]
 }
 
-export default function Portfolio({ siteConfig, heroData, aboutData, education, projects }: PortfolioProps) {
+export default function Portfolio({ siteConfig, heroData, aboutData, education, projects, jobs }: PortfolioProps) {
   return (
     <div className="bg-paper text-charcoal min-h-screen">
       <Header siteConfig={siteConfig} />
@@ -30,6 +31,7 @@ export default function Portfolio({ siteConfig, heroData, aboutData, education, 
           <AboutSection aboutData={aboutData} />
           <EducationSection education={education} />
           <SideProjectsSection projects={projects} />
+          <ExperienceSection jobs={jobs} />
         </main>
         <Footer siteConfig={siteConfig} />
       </div>

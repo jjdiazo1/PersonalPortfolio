@@ -80,7 +80,7 @@ export const jobsQuery = groq`*[_type == "job"] | order(order asc){
   description,
   bullets,
   skills,
-  logo
+  "logo": logo.asset->url
 }`
 
 export const skillsQuery = groq`*[_type == "skill"] | order(order asc){

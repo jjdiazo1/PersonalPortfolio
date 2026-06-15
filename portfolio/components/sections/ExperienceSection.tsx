@@ -2,9 +2,13 @@
 
 import { useRef } from 'react';
 import { motion, useInView, type Transition } from 'framer-motion';
-import { JOBS } from '@/lib/experience-data';
+import type { Job } from '@/lib/types';
 
-export default function ExperienceSection() {
+interface ExperienceSectionProps {
+  jobs: Job[];
+}
+
+export default function ExperienceSection({ jobs }: ExperienceSectionProps) {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: '-10%' });
   const spring: Transition = { type: 'spring', stiffness: 280, damping: 24, mass: 1 };
@@ -23,13 +27,13 @@ export default function ExperienceSection() {
 
       {/* Rows */}
       <div className="px-5 md:px-12">
-        {JOBS.map((job, i) => (
+        {jobs.map((job, i) => (
           <motion.div
             key={job.title + job.company}
             initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ ...spring, delay: i * 0.07 }}
-            className={`py-6${i < JOBS.length - 1 ? ' border-b border-charcoal' : ''}`}
+            className={`py-6${i < jobs.length - 1 ? ' border-b border-charcoal' : ''}`}
           >
             <div className="flex items-start gap-5 md:gap-8">
               {/* Logo */}
