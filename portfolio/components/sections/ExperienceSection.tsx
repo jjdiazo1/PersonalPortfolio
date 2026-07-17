@@ -69,9 +69,9 @@ export default function ExperienceSection({ jobs }: ExperienceSectionProps) {
                 </p>
 
                 {/* Bullets */}
-                {job.bullets.length > 0 && (
+                {(job.bullets ?? []).length > 0 && (
                   <ul className="mt-2 space-y-1">
-                    {job.bullets.map((b) => (
+                    {(job.bullets ?? []).map((b) => (
                       <li
                         key={b}
                         className="font-condensed text-[12px] md:text-[13px] text-graphite leading-[1.6] pl-3 relative before:content-['—'] before:absolute before:left-0 before:text-graphite"
@@ -83,9 +83,9 @@ export default function ExperienceSection({ jobs }: ExperienceSectionProps) {
                 )}
 
                 {/* Skills */}
-                {job.skills.length > 0 && (
+                {(job.skills ?? []).length > 0 && (
                   <div className="flex flex-wrap gap-1.5 mt-3">
-                    {job.skills.map((s) => (
+                    {(job.skills ?? []).map((s) => (
                       <span
                         key={s}
                         className="font-mono text-[10px] uppercase tracking-[0.08em] text-charcoal border border-charcoal px-2 py-0.5"

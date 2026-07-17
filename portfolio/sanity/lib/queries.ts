@@ -78,8 +78,8 @@ export const jobsQuery = groq`*[_type == "job"] | order(order asc){
   period,
   location,
   description,
-  bullets,
-  skills,
+  "bullets": coalesce(bullets, []),
+  "skills": coalesce(skills, []),
   "logo": logo.asset->url
 }`
 
